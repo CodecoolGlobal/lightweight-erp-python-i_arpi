@@ -16,6 +16,13 @@ import data_manager
 # common module
 import common
 
+def get_headers():
+    headers = [ 'Id',
+        'Name',
+        'Email',
+        'Subscribed']
+    rerutn headers
+
 def show_table(table):
     """
     Display a table
@@ -26,8 +33,10 @@ def show_table(table):
     Returns:
         None
     """
-
     # your code
+   common.show_table(table, get_headers())
+
+    
 
 
 def add(table):
@@ -42,7 +51,7 @@ def add(table):
     """
 
     # your code
-
+    common.add(table, get_headers, 'Give new costumers\s data, please!')
     return table
 
 
@@ -59,7 +68,7 @@ def remove(table, id_):
     """
 
     # your code
-
+    common.remove(table, id_)
     return table
 
 
@@ -117,15 +126,16 @@ def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
-        add(table)
+        show_table(table)
     elif option == "2":
-        remove(table, id_)
+        add(table)
     elif option == "3":
-        update(table, id_)
+        id_ = ui.get_inputs(get_header(), "Give id:")
+        remove(table, id_)
     elif option == "4":
+        update(table, id_)
+     elif option == "5":
         get_longest_name_id(table)
-    elif option == "5":
-        get_subscribed_emails(table)
     elif option == "6":
         get_subscribed_emails(table)
     elif option == "0":
@@ -133,15 +143,15 @@ def choose():
     else:
         raise KeyError("There is no such option.")
 
-def handle_menu():
-    options = ['Add new costumers',
+def get_options():
+    options = ['Show cosumer\'s data',
+        'Add new costumers',
         'Remove costumer'
         'Update costumer\'s data',
         'Show costumer with longest name',
         'Emails of subscripted costumers', 
         'Go back to main menu']
-    
-    common.display_menu(options, 'CRM Menu')
+    return options
 
 def start_module():
     """
@@ -152,10 +162,14 @@ def start_module():
     Returns:
         None
     """
-    table = common.read_in_data_from_file(customers.csv)
+    table = data_manager.get_table_from_file(customers.csv)
     while True:
-        handle_menu()
+        common.display_menu(get_options, 'CRM Menu')
         try:
             choose()
         except KeyError as err:
             ui.print_error_message(str(err))
+
+def get_features():
+    
+    feautures = [show_table]

@@ -37,6 +37,11 @@ def add(table, label_list, title):
     new_row = [generate_random(table)] + new_record
     table.append(new_row)
 
+def remove(table, id_):
+    for row in table:
+        if row[0] == id_:
+            table.remove(row)
+
 
 
 
