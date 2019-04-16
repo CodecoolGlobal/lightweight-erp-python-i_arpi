@@ -134,7 +134,7 @@ def choose():
         id_ = ui.get_inputs([id], "Give id:")
         remove(table, id_)
     elif option == "4":
-        id_ = ui.get_inputs([id], "Give id:"
+        id_ = ui.get_inputs([id], "Give id:")
         update(table, id_)
     elif option == "5":
         get_longest_name_id(table)
