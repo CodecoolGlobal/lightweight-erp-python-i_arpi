@@ -85,7 +85,7 @@ def update(table, id_):
     """
 
     # your code
-
+    common.update(table, id_, get_header())
     return table
 
 
@@ -130,9 +130,10 @@ def choose():
     elif option == "2":
         add(table)
     elif option == "3":
-        id_ = ui.get_inputs(get_header(), "Give id:")
+        id_ = ui.get_inputs([id], "Give id:")
         remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs([id], "Give id:"
         update(table, id_)
      elif option == "5":
         get_longest_name_id(table)
