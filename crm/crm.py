@@ -16,20 +16,6 @@ import data_manager
 # common module
 import common
 
-
-def start_module():
-    """
-    Starts this module and displays its menu.
-     * User can access default special features from here.
-     * User can go back to main menu from here.
-
-    Returns:
-        None
-    """
-
-    # your code
-
-
 def show_table(table):
     """
     Display a table
@@ -126,3 +112,50 @@ def get_subscribed_emails(table):
         """
 
     # your code
+
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        add(table)
+    elif option == "2":
+        remove(table, id_)
+    elif option == "3":
+        update(table, id_)
+    elif option == "4":
+        get_longest_name_id(table)
+    elif option == "5":
+        get_subscribed_emails(table)
+    elif option == "6":
+        get_subscribed_emails(table)
+    elif option == "0":
+        sys.exit(0)
+    else:
+        raise KeyError("There is no such option.")
+
+def handle_menu():
+    options = ['Add new costumers',
+        'Remove costumer'
+        'Update costumer\'s data',
+        'Show costumer with longest name',
+        'Emails of subscripted costumers', 
+        'Go back to main menu']
+    
+    common.display_menu(options, 'CRM Menu')
+
+def start_module():
+    """
+    Starts this module and displays its menu.
+     * User can access default special features from here.
+     * User can go back to main menu from here.
+
+    Returns:
+        None
+    """
+    table = common.read_in_data_from_file(customers.csv)
+    while True:
+        handle_menu()
+        try:
+            choose()
+        except KeyError as err:
+            ui.print_error_message(str(err))
