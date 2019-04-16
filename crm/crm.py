@@ -16,12 +16,14 @@ import data_manager
 # common module
 import common
 
+
 def get_headers():
     headers = [ 'Id',
         'Name',
         'Email',
         'Subscribed']
-    rerutn headers
+    return headers
+
 
 def show_table(table):
     """
@@ -34,9 +36,7 @@ def show_table(table):
         None
     """
     # your code
-   common.show_table(table, get_headers())
-
-    
+    common.show_table(table, get_headers())
 
 
 def add(table):
@@ -85,7 +85,7 @@ def update(table, id_):
     """
 
     # your code
-    common.update(table, id_, get_header())
+    common.update(table, id_, get_headers())
     return table
 
 
@@ -122,6 +122,7 @@ def get_subscribed_emails(table):
 
     # your code
 
+
 def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
@@ -135,7 +136,7 @@ def choose():
     elif option == "4":
         id_ = ui.get_inputs([id], "Give id:"
         update(table, id_)
-     elif option == "5":
+    elif option == "5":
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
