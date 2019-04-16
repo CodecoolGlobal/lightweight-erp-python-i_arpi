@@ -21,7 +21,7 @@ def get_headers():
         'Name',
         'Email',
         'Subscribed']
-    rerutn headers
+    return headers
 
 def show_table(table):
     """
@@ -34,7 +34,7 @@ def show_table(table):
         None
     """
     # your code
-   common.show_table(table, get_headers())
+    common.show_table(table, get_headers())
 
     
 
@@ -130,12 +130,12 @@ def choose():
     elif option == "2":
         add(table)
     elif option == "3":
-        id_ = ui.get_inputs([id], "Give id:")
+        id_ = ui.get_inputs(['id'], "Give id:")
         remove(table, id_)
     elif option == "4":
-        id_ = ui.get_inputs([id], "Give id:"
+        id_ = ui.get_inputs(['id'], "Give id:")
         update(table, id_)
-     elif option == "5":
+    elif option == "5":
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
@@ -173,4 +173,12 @@ def start_module():
 
 def get_features():
     
-    feautures = [show_table]
+    features = {"0" : sys.exit(),
+        "1" : show_table(tabel), 
+        "2" : add(table),
+        "3" : id_ = ui.get_inputs(['id_number'], "Give id:") remove(table, id_[0]),
+        "4" : id_ = ui.get_inputs(['id_number'], "Give id:") update(table, id_[0]),
+        "5" : get_longest_name_id(table),
+        "6" : get_subscribed_emails(),
+        }
+        return features
