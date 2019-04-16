@@ -146,7 +146,7 @@ def avg_amount(table, year):
     same_year_transactions_in = []
     same_year_transactions_out = []
     count = 0
-    losss = 0
+    loss = 0
     for row in table:
         if row[3] == year:
             same_year_transactions.append(row)
@@ -158,6 +158,7 @@ def avg_amount(table, year):
     for row in same_year_transactions:
         if row[4] == 'out':
             same_year_transactions_out.append(row)
+    for row in same_year_transactions_out:
         loss += same_year_transactions_out[5]
     avg = (count - loss) / len(same_year_transactions)
     return avg
