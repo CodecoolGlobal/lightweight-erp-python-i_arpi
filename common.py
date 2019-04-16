@@ -28,12 +28,15 @@ def display_menu(options, menu_name):
      
      ui.print_menu(menu_name, options, "Exit menu.")
 
-def read_in_data_from_file(file_name):
-    table = []
-    with open(file_name) as file:
-        for row in file:
-            datas_in_row = row.strip().split(';')
-            table.append(datas_in_row)
-    return table
+def show_table(table, title_list):
+    
+    ui.print_table(table, title_list)
+
+def add(table, label_list, title):
+    new_record = ui.get_inputs(label_list, title)
+    table.append(new_record)
+
+
+
 
 
