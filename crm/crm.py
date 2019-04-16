@@ -16,12 +16,17 @@ import data_manager
 # common module
 import common
 
+
 def get_headers():
     headers = [ 'Id',
         'Name',
         'Email',
         'Subscribed']
     return headers
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2c71bb88749d7b221048db44a301ec7b7b83535
 
 def show_table(table):
     """
@@ -35,8 +40,11 @@ def show_table(table):
     """
     # your code
     common.show_table(table, get_headers())
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> d2c71bb88749d7b221048db44a301ec7b7b83535
 
 
 def add(table):
@@ -85,7 +93,7 @@ def update(table, id_):
     """
 
     # your code
-    common.update(table, id_, get_header())
+    common.update(table, id_, get_headers())
     return table
 
 
@@ -139,6 +147,7 @@ def get_subscribed_emails(table):
             subscribed_emails.append(email_name)
     return subscribed_emails
 
+
 def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
@@ -150,7 +159,11 @@ def choose():
         id_ = ui.get_inputs(['id'], "Give id:")
         remove(table, id_)
     elif option == "4":
+<<<<<<< HEAD
         id_ = ui.get_inputs(['id'], "Give id:")
+=======
+        id_ = ui.get_inputs([id], "Give id:")
+>>>>>>> d2c71bb88749d7b221048db44a301ec7b7b83535
         update(table, id_)
     elif option == "5":
         get_longest_name_id(table)

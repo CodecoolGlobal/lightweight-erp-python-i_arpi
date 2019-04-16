@@ -86,7 +86,10 @@ def get_inputs(list_labels, title):
     inputs = []
 
     # your code
-
+    print(title)
+    for list_label in list_labels:
+        user_input = input(list_label)
+        inputs.append(user_input)
     return inputs
 
 
@@ -102,3 +105,4 @@ def print_error_message(message):
     """
 
     # your code
+    print('Error: ' + message)
