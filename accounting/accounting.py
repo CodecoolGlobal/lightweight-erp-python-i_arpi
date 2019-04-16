@@ -24,7 +24,6 @@ def start_module():
     Starts this module and displays its menu.
      * User can access default special features from here.
      * User can go back to main menu from here.
-
     Returns:
         None
     """
