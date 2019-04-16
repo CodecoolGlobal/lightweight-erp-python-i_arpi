@@ -13,17 +13,17 @@ def make_table():
     return(tables)
 
 def make_title():
-    titles = ["serial", "title", "number", "sold", "sold year", "in stock", "how many sold sold item", "useless number"]
+    titles = ["serial", "title", "number", "sold", "sold year", "stock", "how many sold ", "useless number"]
     return titles
 
 #ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
 
 def len_of_colums():
-    
+
     new_tableses = new_tables()
     lenght_of_items = []
     for lists in new_tableses:
-        
+    
         for item in lists:
             lenght_of_items.append(len(item))
 
@@ -31,8 +31,6 @@ def len_of_colums():
     lenght_of_table = len_of_table()
     composite_list = [lenght_of_items[x:x+lenght_of_table] for x in range(0, len(lenght_of_items),lenght_of_table)]
     #print (composite_list)
-    
-    
     
     longest_titles = []
 
@@ -48,13 +46,15 @@ def len_of_colums():
     return(longest_titles2)
 
 def title_list():
-    list_titles = ["serial", "title",]
+    pass                                                #változtatás
 
-#print(table)
+def table():
+    pass                                                #változtatás
+    #table = make_table()
+
 
 def len_of_row(): #table kivéve az argumentből
     table = make_table()
-    make_table()
     first_line = 0
     lenght_of_row = len(table[first_line])
     #print(lenght_of_row) #= 7
@@ -70,7 +70,6 @@ def len_of_table():
     return lenght_of_table
 
 
-
 #def get_max_lenght(): 
 
 def new_tables():
@@ -81,8 +80,7 @@ def new_tables():
 
 new_tables()
 
-
-table = make_table()
+#table = make_table()                                                       #változtatás
 def print_table(table, title_list):   #print_table(table, title_list)
     """
     Prints table with data.
@@ -104,8 +102,8 @@ def print_table(table, title_list):   #print_table(table, title_list)
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your goes code
-    #table = make_table()
+    #your goes code
+    table = make_table()                                        #változtatás
     dash_char = "-" 
     right_slash = "/"
     left_slash = "\\"
@@ -113,48 +111,32 @@ def print_table(table, title_list):   #print_table(table, title_list)
     
     longest_titles2 = len_of_colums()
             
-    """
-    max_widht_item_of_colums = 
-    max_width_item = max([len(str(item)) for item in 
-    """
+   
     separator_line = []
     for i in longest_titles2:
         separator_line.append(i*dash_char+separator)
     #print(separator_line)
-
     joint_separator_line = "".join(separator_line)
     #print(joint_separator_line)
     list_separator_line = separator + joint_separator_line
     last_line = left_slash +(len(joint_separator_line)-1)*dash_char+ right_slash
-
     first_line = right_slash + (len(joint_separator_line)-1)*dash_char+ left_slash
     print(first_line)
 
     for lists in table:
-        
         if lists == table[0]:
             pass
         else:
-        
             print(f"\n{list_separator_line}")
-        
         print(end = separator)
+
         for enum, item in enumerate(lists):
-              
             print(item.center(longest_titles2[enum]), end= separator)
                 
-
     print("")
     print(last_line)
     
-"""
-def max_(list):
-    max = list[0]
-    for i in list:
-        if i > max:
-            max = i
-    return max
-"""
+
 print_table(table, title_list)
 
 
