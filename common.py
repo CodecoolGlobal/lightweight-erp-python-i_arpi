@@ -36,5 +36,4 @@ def read_in_data_from_file(file_name):
             table.append(datas_in_row)
     return table
 
-table = read_in_data_from_file('crm/customers_test.csv')
-print(table)
+
