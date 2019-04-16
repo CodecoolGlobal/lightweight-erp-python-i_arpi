@@ -24,6 +24,11 @@ def generate_random(table):
 
     return generated
 
+def choose(features):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    features[option]
+
 def display_menu(options, menu_name):
      
      ui.print_menu(menu_name, options, "Exit menu.")
@@ -41,7 +46,7 @@ def remove(table, id_):
     for row in table:
         if row[0] == id_:
             table.remove(row)
-
+    
 def update(table, id_, label_list):
     for row in table:
         if row[0] == id_:

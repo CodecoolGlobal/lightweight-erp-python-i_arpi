@@ -105,6 +105,15 @@ def get_longest_name_id(table):
         """
 
     # your code
+    longest_so_far = ''
+    for row in table: 
+        if len(row[2]) > len(longest_so_far):
+            longest_so_far = row[2]
+            longests_id = row[1]
+    return longests_so_far
+
+    
+    
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -121,6 +130,14 @@ def get_subscribed_emails(table):
         """
 
     # your code
+    subscribed_emails = []
+    for row in table:
+        subscription = int(row[3])
+        if subscription == 1:
+            email = row[2]
+            email_name = email + ';' + row[1]
+            subscribed_emails.append(email_name)
+    return subscribed_emails
 
 def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -171,6 +188,7 @@ def start_module():
         except KeyError as err:
             ui.print_error_message(str(err))
 
+"""
 def get_features():
     
     features = {"0" : sys.exit(),
@@ -182,3 +200,4 @@ def get_features():
         "6" : get_subscribed_emails(),
         }
         return features
+        """
