@@ -42,6 +42,14 @@ def remove(table, id_):
         if row[0] == id_:
             table.remove(row)
 
+def update(table, id_, label_list):
+    for row in table:
+        if row[0] == id_:
+            updating_record = ui.get_inputs(label_list,'Give new data:')
+            row = row[0] + updating_record
+        
+
+
 
 
 
