@@ -27,3 +27,14 @@ def generate_random(table):
 def display_menu(options, menu_name):
      
      ui.print_menu(menu_name, options, "Exit menu.")
+
+def read_in_data_from_file(file_name):
+    table = []
+    with open(file_name) as file:
+        for row in file:
+            datas_in_row = row.strip().split(';')
+            table.append(datas_in_row)
+    return table
+
+table = read_in_data_from_file('crm/customers_test.csv')
+print(table)
