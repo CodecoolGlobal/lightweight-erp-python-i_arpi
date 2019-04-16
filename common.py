@@ -34,7 +34,8 @@ def show_table(table, title_list):
 
 def add(table, label_list, title):
     new_record = ui.get_inputs(label_list, title)
-    table.append(new_record)
+    new_row = [generate_random(table)] + new_record
+    table.append(new_row)
 
 
 
