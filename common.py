@@ -23,3 +23,7 @@ def generate_random(table):
     # your code
 
     return generated
+
+def display_menu(options, menu_name):
+     
+     ui.print_menu(menu_name, options, "Exit menu.")
