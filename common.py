@@ -38,15 +38,8 @@ def generate_random(table):
             char_from_special = special_characters[special_index]
             char_from_numbers = numbers[numbers_index]
 
-            end_part += char_from_special
-            if i == 0:
-                fist_part = char_from_abc + char_from_upper + char_from_numbers
-            if i == 1:
-                second_part = char_from_numbers + char_from_upper + char_from_abc
+            generated += char_from_abc + char_from_upper +char_from_numbers + char_from_special
 
-        generated.append(first_part)
-        genrated.append(second_part)
-        generated.append(en_part)
         for row in table:
             if row[0] != generated:
                 return generated
@@ -56,18 +49,17 @@ def choose(features):
     option = inputs[0]
     features[option]
 
-def display_menu(options, menu_name):
-     
-     ui.print_menu(menu_name, options, "Exit menu.")
 
 def show_table(table, title_list):
     
     ui.print_table(table, title_list)
 
 def add(table, label_list, title):
-    new_record = ui.get_inputs(label_list, title)
+    sliced_label_list = label_list[1:]
+    new_record = ui.get_inputs(sliced_label_list, title)
     new_row = [generate_random(table)] + new_record
     table.append(new_row)
+    show_table(table, label_list)
 
 
 def remove(table, id_):

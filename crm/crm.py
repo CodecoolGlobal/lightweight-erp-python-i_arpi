@@ -52,7 +52,8 @@ def add(table):
     """
 
     # your code
-    common.add(table, get_headers, 'Give new costumers\s data, please!')
+    title_list = get_headers()
+    common.add(table, title_list, 'Give new costumers\s data, please!')
     return table
 
 
@@ -140,7 +141,6 @@ def get_subscribed_emails(table):
             subscribed_emails.append(email_name)
     return subscribed_emails
 
-
 def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
@@ -158,6 +158,8 @@ def choose(table):
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
+    elif option == "0":
+        raise EnvironmentError
     else:
         raise KeyError("There is no such option.")
 
@@ -186,6 +188,8 @@ def start_module():
             choose(table)
         except KeyError as err:
             ui.print_error_message(str(err))
+        except EnvironmentError:
+            return
 
 """
 def get_features():
