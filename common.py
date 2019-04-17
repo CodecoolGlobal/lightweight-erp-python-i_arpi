@@ -66,12 +66,12 @@ def remove(table, id_):
     
     
 def update(table, id_, label_list):
-    sliced_label_list = label_list[1:]
+    updated_row_id = [generate_random(table)]
     for row in table:
         if str(row[0]).strip() == str(id_).strip():
             table.remove(row)
             updating_record = ui.get_inputs(label_list[1:], 'Give new data:')
-            updated_row = sliced_label_list + updating_record
+            updated_row = updated_row_id + updating_record
             table.append(updated_row)
         
 
