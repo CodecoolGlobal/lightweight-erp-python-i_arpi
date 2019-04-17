@@ -113,7 +113,7 @@ def get_longest_name_id(table):
         if len(row[2]) > len(longest_so_far):
             longest_so_far = row[2]
             longests_id = row[1]
-    return longests_so_far
+    return longest_so_far
 
     
     
@@ -156,9 +156,9 @@ def choose(table):
         id_ = ui.get_inputs(['id'], "Give id:")[0]
         update(table, id_)
     elif option == "5":
-        get_longest_name_id(table)
+        ui.print_result(get_longest_name_id(table), "The customer's ID with the longest name is: ")
     elif option == "6":
-        get_subscribed_emails(table)
+        ui.print_result(get_subscribed_emails(table), "The customers who has subscribed to the newsletter are: ")
     elif option == "0":
         raise EnvironmentError
     else:
@@ -169,7 +169,7 @@ def get_options():
         'Add new costumers',
         'Remove costumer',
         'Update costumer\'s data',
-        'Show costumer with longest name',
+        "Show costumer's ID with the longest name",
         'Emails of subscripted costumers' ]
     return options
 
