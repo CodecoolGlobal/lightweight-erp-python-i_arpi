@@ -52,7 +52,7 @@ def get_options():
     return options
 
 def get_label_list():
-    labels = ['ID', 'Name', 'Birth year']
+    labels = ['ID', 'Name: ', 'Birth year: ']
     return labels
 
 
@@ -67,12 +67,12 @@ def add(table):
 
 
 def remove(table, id_):
-
+    common.remove(table, id_)
     return table
 
 
 def update(table, id_):
-    
+    common.update(table, id_, get_label_list())
     return table
 
 # special functions:
