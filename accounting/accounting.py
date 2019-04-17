@@ -28,7 +28,7 @@ def start_module():
         None
     """
 
-    table = data_manager.get_table_from_file('items.csv')
+    table = data_manager.get_table_from_file('/Users/mac/Documents/My-projects/lightweight-erp-python-i_arpi/accounting/items.csv')
     for row in table:
         row[1] = int(row[1])
         row[2] = int(row[2])
@@ -36,14 +36,14 @@ def start_module():
         row[5] = int(row[5])
 
     while True:
-        common.display_menu(get_options, 'Accounting Manager')
+        ui.print_menu('Accounting Manager', get_options(), 'Back to main menu')
         try:
-            choose()
+            choose(table)
         except KeyError as err:
             ui.print_error_message(str(err))
 
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
