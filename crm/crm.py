@@ -53,9 +53,7 @@ def add(table):
 
     # your code
     title_list = get_headers()
-    sliced_title_list = title_list[1:]
-
-    common.add(table, sliced_title_list, 'Give new costumers\s data, please!')
+    common.add(table, title_list, 'Give new costumers\s data, please!')
     return table
 
 
