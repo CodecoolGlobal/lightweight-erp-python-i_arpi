@@ -18,10 +18,10 @@ import common
 
 
 def get_headers():
-    headers = [ 'Id',
-        'Name',
-        'Email',
-        'Subscribed']
+    headers = [ 'Id ',
+        'Name ',
+        'Email ',
+        'Subscribed ']
     return headers
 
 def show_table(table):
@@ -53,7 +53,7 @@ def add(table):
 
     # your code
     title_list = get_headers()
-    common.add(table, title_list, 'Give new costumers\s data, please!')
+    common.add(table, title_list, 'Give new costumers\'s data, please!')
     return table
 
 
@@ -72,7 +72,7 @@ def remove(table, id_):
     # your code
     common.remove(table, id_)
     ui.print_table(table, get_headers())
-    return table
+    
 
 
 def update(table, id_):
@@ -150,10 +150,10 @@ def choose(table):
     elif option == "2":
         add(table)
     elif option == "3":
-        id_ = ui.get_inputs(['id'], "Give id:")
+        id_ = ui.get_inputs(['id'], "Give id:")[0]
         remove(table, id_)
     elif option == "4":
-        id_ = ui.get_inputs(['id'], "Give id:")
+        id_ = ui.get_inputs(['id'], "Give id:")[0]
         update(table, id_)
     elif option == "5":
         get_longest_name_id(table)

@@ -60,8 +60,9 @@ def add(table, label_list, title):
 
 def remove(table, id_):
     for row in table:
-        if row[0] == id_:
+        if str(row[0]).strip() == id_.strip():
             table.remove(row)
+    
     
     
 def update(table, id_, label_list):
