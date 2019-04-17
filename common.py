@@ -50,22 +50,19 @@ def choose(features):
     features[option]
 
 
-def show_table(table, title_list):
-    
-    ui.print_table(table, title_list)
-
 def add(table, label_list, title):
     sliced_label_list = label_list[1:]
     new_record = ui.get_inputs(sliced_label_list, title)
     new_row = [generate_random(table)] + new_record
     table.append(new_row)
-    show_table(table, label_list)
+    ui.print_table(table, label_list)
 
 
 def remove(table, id_):
     for row in table:
         if row[0] == id_:
             table.remove(row)
+    
     
 def update(table, id_, label_list):
     for row in table:

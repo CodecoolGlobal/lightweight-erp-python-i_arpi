@@ -35,7 +35,7 @@ def show_table(table):
         None
     """
     # your code
-    common.show_table(table, get_headers())
+    ui.print_table(table, get_headers())
 
     
 
@@ -71,6 +71,7 @@ def remove(table, id_):
 
     # your code
     common.remove(table, id_)
+    ui.print_table(table, get_headers())
     return table
 
 
@@ -166,7 +167,7 @@ def choose(table):
 def get_options():
     options = ['Show costumer\'s data',
         'Add new costumers',
-        'Remove costumer'
+        'Remove costumer',
         'Update costumer\'s data',
         'Show costumer with longest name',
         'Emails of subscripted costumers' ]
