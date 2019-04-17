@@ -29,7 +29,59 @@ def start_module():
         None
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+
+    while True:
+        ui.print_menu('Sales module', get_options(), 'Back to main menu')
+        try:
+            choose(table)
+        except KeyError as err:
+            ui.print_error_message(str(err))
+        except EnvironmentError:
+            return
+
+
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        id_ = ui.get_inputs(['id: '], "Give id.")
+        remove(table, id_[0])
+    elif option == "4":
+        id_ = ui.get_inputs(['id: '], "Give id.")
+        update(table, id_[0])
+    elif option == "5":
+        get_lowest_price_item_id(table)
+    elif option == "6":
+        get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+    elif option == "0":
+        raise EnvironmentError
+    else:
+        raise KeyError("There is no such option.")
+
+
+def get_options():
+    options = ["Display sales table",
+               "Add an item",
+               "Remove an item",
+               "Update sales table",
+               "Show the ID of the game sold for the lowest price",
+               "Show the games sold between two given dates"]
+    return options
+
+
+def get_headers():
+    headers = ["ID ",
+               "Title ",
+               "Price ",
+               "Month ",
+               "Day ",
+               "Year "]
+    return headers
 
 
 def show_table(table):
@@ -43,7 +95,7 @@ def show_table(table):
         None
     """
 
-    # your code
+    ui.print_table(table, get_headers())
 
 
 def add(table):
@@ -57,8 +109,7 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    common.add(table, get_headers(), "Give new item's data, please!")
     return table
 
 
@@ -74,9 +125,8 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
-    return table
+    common.remove(table, id_)
+    ui.print_table(table, get_headers())
 
 
 def update(table, id_):
@@ -91,8 +141,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
+    common.update(table, id_, get_headers())
     return table
 
 
