@@ -151,7 +151,12 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print(f'\t{title}:')
+    for i in range(6):
+        print(f'\t\t(i+1) {list_options[i]}')
+    print(f'\t\t(0) {exit_message}')
+
+    
 
 
 def get_inputs(list_labels, title):
@@ -176,7 +181,10 @@ def get_inputs(list_labels, title):
     inputs = []
 
     # your code
-
+    print(title)
+    for list_label in list_labels:
+        user_input = input(list_label)
+        inputs.append(user_input)
     return inputs
 
 
@@ -192,4 +200,4 @@ def print_error_message(message):
     """
 
     # your code
-"kH14J&",
+    print('Error: ' + message)

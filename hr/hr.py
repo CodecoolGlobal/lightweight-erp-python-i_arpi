@@ -8,12 +8,18 @@ Data table structure:
 """
 
 # everything you'll need is imported:
+import os 
 # User interface module
 import ui
 # data manager module
 import data_manager
 # common module
 import common
+
+def header():
+    headers = ['id', 
+    'name',
+    'birth year', ]
 
 
 def start_module():
@@ -25,8 +31,35 @@ def start_module():
     Returns:
         None
     """
-
-    # your code
+    options = ["Display a table"
+    "Add a new person",
+    "Remove person",
+    "Update infomation",
+    "Who is the oldest?",
+    "Who is the closest to the avarage age?"]
+    table = data_manager.get_table_from_file("hr/persons_test.csv")
+    ui.print_menu
+    option = ui.get_inputs("Please enter a number: ")
+    if option[0] == "1":
+        show_table(table)
+    elif option[0] == "2":
+        table = add(table)
+    elif option[0] == "3":
+        show_table(table)
+        id_ = ui.get_inputs(['Please type ID to remove: '], "\n")
+        table = remove(table, id_)
+    elif option[0] == "4":
+        show_table(table)
+        id_ = ui.get_inputs(["Please type ID to update: "], "\n")
+        table = update(table, id_)
+    elif option[0] == "5":
+        ui.print_result(get_oldest_person(table), "The oldest person is: ")
+    elif option[0] == "6":
+        ui.print_result(get_persons_closest_to_average(table), "People closest to average age: ")
+    elif option[0] == "0":
+        sys.exit()
+    else:
+        ui.print_error_message("There is no such an option.")
 
 
 def show_table(table):
@@ -41,6 +74,9 @@ def show_table(table):
     """
 
     # your code
+    os.system('clear')
+    title_list = ['ID', 'Name', 'Birth date']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -108,6 +144,17 @@ def get_oldest_person(table):
     """
 
     # your code
+    year = int(table[0][2])
+    people_list = []
+    for component in table:
+        if int(component[2]) < year:
+            year = int(component[2])
+            people_list[0] = component[1]
+        elif int(component[2]) == year:
+            year = int(component[2])
+            people_list.append(component[1])
+    os.system('clear')
+    return people_list
 
 
 def get_persons_closest_to_average(table):
@@ -122,3 +169,6 @@ def get_persons_closest_to_average(table):
     """
 
     # your code
+    years = []
+    for component in table:
+        years.append
