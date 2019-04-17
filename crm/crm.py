@@ -89,7 +89,7 @@ def update(table, id_):
 
     # your code
     common.update(table, id_, get_headers())
-    return table
+    
 
 
 # special functions:

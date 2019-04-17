@@ -67,9 +67,11 @@ def remove(table, id_):
     
 def update(table, id_, label_list):
     for row in table:
-        if row[0] == id_:
-            updating_record = ui.get_inputs(label_list, 'Give new data:')
-            row = row[0] + updating_record
+        if str(row[0]).strip() == id_.strip():
+            updating_record = ui.get_inputs(label_list[1:], 'Give new data:')
+            sliced_row = row[:1]
+            row = sliced_row + updating_record
+    ui.print_table(table,label_list)
         
 
 
