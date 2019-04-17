@@ -71,7 +71,6 @@ def show_table(table):
     """
 
     # your code
-    os.system('clear')
     title_list = ['ID', 'Name', 'Birth date']
     ui.print_table(table, title_list)
 
@@ -181,5 +180,4 @@ def get_persons_closest_to_average(table):
         elif abs(int(component[2]) - average_of_years) == abs(first_person - average_of_years):
             first_person = int(component[2])
             people_list.append(component[1])
-    return people_list
-    
+    return people_list 
