@@ -28,7 +28,58 @@ def start_module():
         None
     """
 
-    # your code
+    table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+    while True:
+        ui.print_menu('Inventory Module', get_options(), 'Back to main menu')
+        try:
+            choose(table)
+        except KeyError as err:
+            ui.print_error_message(str(err))
+        except EnvironmentError:
+            return
+
+
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        id_ = ui.get_inputs(['id: '], "Give id.")
+        remove(table, id_[0])
+    elif option == "4":
+        id_ = ui.get_inputs(['id: '], "Give id.")
+        update(table, id_[0])
+    elif option == "5":
+        get_available_items(table)
+    elif option == "6":
+        get_average_durability_by_manufacturers(table)
+    elif option == "0":
+        raise EnvironmentError
+    else:
+        raise KeyError("There is no such option.")
+
+
+def get_options():
+    options = ["Display inventory table",
+               "Add an item",
+               "Remove an item",
+               "Update inventory table",
+               "Show the available items",
+               "Show average durability times for each manufacturer"]
+    return options
+
+
+def get_headers():
+    headers = ["ID ",
+               "Name ",
+               "Manufacturer ",
+               "Purchase Year ",
+               "Durability "]
+    return headers
 
 
 def show_table(table):
@@ -42,7 +93,7 @@ def show_table(table):
         None
     """
 
-    # your code
+    ui.print_table(table, get_headers())
 
 
 def add(table):
@@ -56,8 +107,7 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    common.add(table, get_headers(), "Give new inventory item's data, please!")
     return table
 
 
@@ -73,9 +123,8 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
-    return table
+    common.remove(table, id_)
+    ui.print_table(table, get_headers())
 
 
 def update(table, id_):
@@ -90,8 +139,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
+    common.update(table, id_, get_headers())
     return table
 
 

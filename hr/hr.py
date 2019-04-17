@@ -16,6 +16,8 @@ def start_module():
             choose(table)
         except KeyError as err:
             ui.print_error_message(str(err))
+        except EnvironmentError:
+            return
 
 ##
 
@@ -28,19 +30,19 @@ def choose(table):
     elif option[0] == "3":
         show_table(table)
         id_ = ui.get_inputs(['Please type ID to remove: '], "\n")
-        table = remove(table, id_)
+        table = remove(table, id_[0])
     elif option[0] == "4":
         show_table(table)
         id_ = ui.get_inputs(["Please type ID to update: "], "\n")
-        table = update(table, id_)
+        table = update(table, id_[0])
     elif option[0] == "5":
         ui.print_result(get_oldest_person(table), "The oldest person is: ")
     elif option[0] == "6":
         ui.print_result(get_persons_closest_to_average(table), "People closest to average age: ")
     elif option[0] == "0":
-        sys.exit()
+        raise EnvironmentError
     else:
-        ui.print_error_message("There is no such an option.")
+        raise KeyError("There is no such an option.")
 
 def get_options():
     options = ["Display a table",
@@ -57,8 +59,7 @@ def get_label_list():
 
 
 def show_table(table):
-    title_list = ['ID', 'Name', 'Birth date']
-    ui.print_table(table, title_list)
+    ui.print_table(table, get_label_list())
 
 
 def add(table):
@@ -68,7 +69,7 @@ def add(table):
 
 def remove(table, id_):
     common.remove(table, id_)
-    return table
+    ui.print_table(table, get_label_list())
 
 
 def update(table, id_):
