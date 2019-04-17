@@ -46,7 +46,7 @@ def len_of_table(new_table):
 
 def transform_tables(table):
     new_table = list(zip(*table))
-    print(new_table)
+    #print(new_table)
     return new_table
 
 #table = make_table()                                                       #változtatás

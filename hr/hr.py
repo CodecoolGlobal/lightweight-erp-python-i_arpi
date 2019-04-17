@@ -27,15 +27,12 @@ def start_module():
     Returns:
         None
     """
-    options = ["Display a table"
-    "Add a new person",
-    "Remove person",
-    "Update infomation",
-    "Who is the oldest?",
-    "Who is the closest to the avarage age?"]
 
-    table = data_manager.get_table_from_file("hr/persons_test.csv")
-    ui.print_menu
+    table = data_manager.get_table_from_file("/home/vanelli/Documents/lightweight-erp-python-i_arpi/hr")
+    while True:
+        ui.print_show_menu_hr("HR menu", get_options, "Please enter a number:")
+    
+def choose(table):
     option = ui.get_inputs(["Please enter a number: "], "")
     if option[0] == "1":
         show_table(table)
@@ -58,9 +55,19 @@ def start_module():
     else:
         ui.print_error_message("There is no such an option.")
 
+def get_options():
+    options = ["Display a table"
+    "Add a new person",
+    "Remove person",
+    "Update infomation",
+    "Who is the oldest?",
+    "Who is the closest to the avarage age?"]
+    return options
+
 
 def show_menu_hr():
     ui.print_show_menu_hr("HR menu", options, "Enter a number: ")
+
 
 def show_table(table):
     """
