@@ -39,7 +39,7 @@ def generate_random(table):
             char_from_numbers = numbers[numbers_index]
 
             generated += char_from_abc + char_from_upper +char_from_numbers + char_from_special
-            
+
         for row in table:
             if row[0] != generated:
                 return generated
@@ -49,9 +49,6 @@ def choose(features):
     option = inputs[0]
     features[option]
 
-def display_menu(options, menu_name):
-     
-     ui.print_menu(menu_name, options, "Exit menu.")
 
 def show_table(table, title_list):
     
