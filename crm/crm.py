@@ -52,7 +52,10 @@ def add(table):
     """
 
     # your code
-    common.add(table, get_headers, 'Give new costumers\s data, please!')
+    title_list = get_headers()
+    sliced_title_list = title_list[1:]
+
+    common.add(table, sliced_title_list, 'Give new costumers\s data, please!')
     return table
 
 
@@ -140,6 +143,13 @@ def get_subscribed_emails(table):
             subscribed_emails.append(email_name)
     return subscribed_emails
 
+def EndProgram(input = 0):
+    if input = 0:
+        return False
+    elif input = 1:
+        return True
+
+
 
 def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -158,6 +168,8 @@ def choose(table):
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
+    elif option == "0":
+        
     else:
         raise KeyError("There is no such option.")
 
@@ -180,7 +192,7 @@ def start_module():
         None
     """
     table = data_manager.get_table_from_file('crm/customers.csv')
-    while True:
+    while EndProgram() == False:
         ui.print_menu("CRM Menu", get_options(), "Go back to main menu")
         try:
             choose(table)
