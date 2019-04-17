@@ -117,7 +117,7 @@ def add(table):
         list: Table with a new record
     """
 
-    common.add(table, get_headers, "Give new costumer's data, please!")
+    common.add(table, get_headers(), "Give new costumer's data, please!")
     return table
 
 
