@@ -45,7 +45,6 @@ def len_of_table(new_table):
     return lenght_of_table
 
 def transform_tables(table):
-    table = make_table()
     new_table = list(zip(*table))
     print(new_table)
     return new_table
@@ -80,7 +79,7 @@ def print_table(table, title_list):   #print_table(table, title_list)
     left_slash = "\\"
     separator = "|"
     
-    longest_titles = len_of_colums(new_table)
+    longest_titles = len_of_colums(table)
     separator_line = []
 
     for i in longest_titles:
