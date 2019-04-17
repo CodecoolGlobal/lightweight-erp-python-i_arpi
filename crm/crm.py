@@ -165,7 +165,7 @@ def choose(table):
         raise KeyError("There is no such option.")
 
 def get_options():
-    options = ['Show cosumer\'s data',
+    options = ['Show costumer\'s data',
         'Add new costumers',
         'Remove costumer',
         'Update costumer\'s data',
