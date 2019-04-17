@@ -81,7 +81,7 @@ def print_table(table, title_list):   #print_table(table, title_list)
     """
 
     #your goes code
-    #table = make_table()                                        #változtatás
+    table = make_table()                                        #változtatás
     dash_char = "-" 
     right_slash = "/"
     left_slash = "\\"
