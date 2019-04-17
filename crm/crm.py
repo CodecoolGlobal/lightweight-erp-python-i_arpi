@@ -182,7 +182,7 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file(customers.csv)
+    table = data_manager.get_table_from_file('crm/customers.csv')
     while True:
         common.display_menu(get_options, 'CRM Menu')
         try:
