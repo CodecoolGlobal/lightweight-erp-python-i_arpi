@@ -2,30 +2,23 @@
 
 #ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
 
-def make_table(): #3 helyen van meghívva: len_of_table, new_table, print_table
-    titles = make_title()
-    first_table = [["kH14J&", "Age of Empires II", "1", "21", "2016", "in", "31", "14"], 
-        ["kH38Jm&", "ARMA" ,"10", "23", "2016", "out", "40", "14"], 
-        ["eH34Jd&", "Amnesia", "2", "12", "2016", "in", "400", "14"], 
-        ["kH38Ju&","Age of Wonders: Shadow Magic", "3", "10", "2016", "in", "20", "12"]]
+def make_table(table, title_list): #3 helyen van meghívva: len_of_table, new_table, print_table
+    titles = title_list
+    first_table = table
     tables = [titles] + first_table   
     return(tables)
 
-def make_title():
-    titles = ["serial", "title", "number", "sold", "sold years", "stock", "how many sold", "useless number"]
-    return titles
 
 #ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
 
-def len_of_colums():
-    new_tableses = new_tables()
+def len_of_colums(new_table):
     lenght_of_items = []
 
-    for lists in new_tableses:
+    for lists in new_table:
         for item in lists:
             lenght_of_items.append(len(item))
 
-    lenght_of_table = len_of_table()
+    lenght_of_table = len_of_table(new_table)
     row_to_column_list = [lenght_of_items[x:x+lenght_of_table] for x in range(0, len(lenght_of_items),lenght_of_table)]
     longest_titles = []
 
@@ -40,22 +33,21 @@ def len_of_colums():
         count += 1
         
     return(longest_titles)
-    
+"""
 def title_list():
     pass                                                #változtatás
 
 def table():
     pass                                                #változtatás
-
-def len_of_table():
-    table = make_table()
-    lenght_of_table = len(table)
+"""
+def len_of_table(new_table):
+    lenght_of_table = len(new_table)
     return lenght_of_table
 
-def new_tables():
+def transform_tables(table):
     table = make_table()
     new_table = list(zip(*table))
-    #print(new_table)
+    print(new_table)
     return new_table
 
 #table = make_table()                                                       #változtatás
@@ -81,13 +73,14 @@ def print_table(table, title_list):   #print_table(table, title_list)
     """
 
     #your goes code
-    table = make_table()                                        #változtatás
+    table = make_table(table, title_list)
+    new_table = transform_tables(table)                                        #változtatás
     dash_char = "-" 
     right_slash = "/"
     left_slash = "\\"
     separator = "|"
     
-    longest_titles = len_of_colums()
+    longest_titles = len_of_colums(new_table)
     separator_line = []
 
     for i in longest_titles:
@@ -112,7 +105,7 @@ def print_table(table, title_list):   #print_table(table, title_list)
     print("")
     print(last_line)
     
-print_table(table, title_list)
+#print_table(table, title_list)
 
 #CSAK MINTA KÓD INNEN
 def print_result(result, label):
@@ -165,7 +158,7 @@ def print_menu(title, list_options, exit_message):
 
     print(f'\t{title}:')
     for i in range(6):
-        print(f'\t\t(i+1) {list_options[i]}')
+        print(f'\t\t{i+1} {list_options[i]}')
     print(f'\t\t(0) {exit_message}')
 
     

@@ -36,7 +36,7 @@ def start_module():
 
     table = data_manager.get_table_from_file("hr/persons_test.csv")
     ui.print_menu
-    option = ui.get_inputs("Please enter a number: ")
+    option = ui.get_inputs(["Please enter a number: "], "")
     if option[0] == "1":
         show_table(table)
     elif option[0] == "2":
