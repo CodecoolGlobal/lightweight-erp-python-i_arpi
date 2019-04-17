@@ -5,8 +5,8 @@
 def make_table(table, title_list): #3 helyen van meghívva: len_of_table, new_table, print_table
     titles = title_list
     first_table = table
-    tables = [titles] + first_table   
-    return(tables)
+    tables = [titles] + first_table  
+    return tables
 
 
 #ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
