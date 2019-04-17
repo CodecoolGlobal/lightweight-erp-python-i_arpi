@@ -43,6 +43,8 @@ def start_module():
             choose(table)
         except KeyError as err:
             ui.print_error_message(str(err))
+        except EnvironmentError:
+            return
 
 
 def choose(table):
@@ -53,10 +55,10 @@ def choose(table):
     elif option == "2":
         add(table)
     elif option == "3":
-        id_ = ui.get_inputs(['id'], "Give id:")
-        remove(table, id_)
+        id_ = ui.get_inputs(['id: '], "Give id.")
+        remove(table, id_[0])
     elif option == "4":
-        id_ = ui.get_inputs(['id'], "Give id:")
+        id_ = ui.get_inputs(['id: '], "Give id.")
         update(table, id_)
     elif option == "5":
         which_year_max(table)
@@ -64,7 +66,7 @@ def choose(table):
         year = ui.get_inputs(['year: '], "Please, specify a year.")
         avg_amount(table, year)
     elif option == "0":
-        sys.exit(0)
+        raise EnvironmentError
     else:
         raise KeyError("There is no such option.")
 
@@ -82,12 +84,12 @@ def get_options():
 
 
 def get_headers():
-    headers = ["ID",
-               "Month",
-               "Day",
-               "Year",
-               "Type",
-               "Amount"]
+    headers = ["ID ",
+               "Month ",
+               "Day ",
+               "Year ",
+               "Type ",
+               "Amount "]
     return headers
 
 
@@ -102,7 +104,7 @@ def show_table(table):
         None
     """
 
-    common.show_table(table, get_headers())
+    ui.print_table(table, get_headers())
     
 
 
@@ -134,7 +136,7 @@ def remove(table, id_):
     """
 
     common.remove(table, id_)
-    return table
+    ui.print_table(table, get_headers())
 
 
 def update(table, id_):
