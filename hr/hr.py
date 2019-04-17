@@ -59,6 +59,9 @@ def start_module():
         ui.print_error_message("There is no such an option.")
 
 
+def show_menu_hr():
+    ui.print_show_menu_hr("HR menu", options, "Enter a number: ")
+
 def show_table(table):
     """
     Display a table
