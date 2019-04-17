@@ -1,15 +1,10 @@
 """ User Interface (UI) module """
 
-#ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
-
-def make_table(table, title_list): #3 helyen van meghívva: len_of_table, new_table, print_table
+def make_table(table, title_list): 
     titles = title_list
     first_table = table
     tables = [titles] + first_table  
     return tables
-
-
-#ILYEN MÓDON KAP ADATOKAT A PRINT TABLE
 
 def len_of_colums(new_table):
     lenght_of_items = []
@@ -33,13 +28,7 @@ def len_of_colums(new_table):
         count += 1
         
     return(longest_titles)
-"""
-def title_list():
-    pass                                                #változtatás
 
-def table():
-    pass                                                #változtatás
-"""
 def len_of_table(new_table):
     lenght_of_table = len(new_table)
     return lenght_of_table
@@ -48,9 +37,8 @@ def transform_tables(table):
     new_table = list(zip(*table))
     #print(new_table)
     return new_table
-
-#table = make_table()                                                       #változtatás
-def print_table(table, title_list):   #print_table(table, title_list)
+                                              
+def print_table(table, title_list):   
     """
     Prints table with data.
 
@@ -70,10 +58,10 @@ def print_table(table, title_list):   #print_table(table, title_list)
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
     #your goes code
+
     table = make_table(table, title_list)
-    new_table = transform_tables(table)                                        #változtatás
+    new_table = transform_tables(table)                                        
     dash_char = "-" 
     right_slash = "/"
     left_slash = "\\"
@@ -104,9 +92,6 @@ def print_table(table, title_list):   #print_table(table, title_list)
     print("")
     print(last_line)
     
-#print_table(table, title_list)
-
-#CSAK MINTA KÓD INNEN
 def print_result(result, label):
     """
     Displays results of the special functions.
