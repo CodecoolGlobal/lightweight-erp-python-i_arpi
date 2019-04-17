@@ -106,15 +106,17 @@ def print_result(result, label):
 
     # your code
     if type(result) == list:
-        print("")
+        print(label)
         for element in result:
-            print(element)
+            print(f'{element}, ')
             print("")
     elif type(result) == dict:
+        print(label)
         for key, value in result.items():
             print(key, value)
         print("")
     else:
+        print(label)
         print(result)
         print("")
 
