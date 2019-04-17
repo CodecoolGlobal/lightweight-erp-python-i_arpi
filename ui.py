@@ -38,6 +38,18 @@ def print_result(result, label):
     """
 
     # your code
+    if type(result) == list:
+        print("")
+        for element in result:
+            print(element)
+            print("")
+    elif type(result) == dict:
+        for key, value in result.items():
+            print(key, value)
+        print("")
+    else:
+        print(result)
+        print("")
 
 
 def print_menu(title, list_options, exit_message):

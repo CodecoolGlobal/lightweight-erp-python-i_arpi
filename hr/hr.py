@@ -8,18 +8,14 @@ Data table structure:
 """
 
 # everything you'll need is imported:
-import os 
+import sys
+import os
 # User interface module
 import ui
 # data manager module
 import data_manager
 # common module
 import common
-
-def header():
-    headers = ['id', 
-    'name',
-    'birth year', ]
 
 
 def start_module():
@@ -37,6 +33,7 @@ def start_module():
     "Update infomation",
     "Who is the oldest?",
     "Who is the closest to the avarage age?"]
+
     table = data_manager.get_table_from_file("hr/persons_test.csv")
     ui.print_menu
     option = ui.get_inputs("Please enter a number: ")
@@ -153,7 +150,6 @@ def get_oldest_person(table):
         elif int(component[2]) == year:
             year = int(component[2])
             people_list.append(component[1])
-    os.system('clear')
     return people_list
 
 
@@ -171,4 +167,19 @@ def get_persons_closest_to_average(table):
     # your code
     years = []
     for component in table:
-        years.append
+        years.append(int(component[2]))
+        a = 0
+    for component in years:
+        a += int(component)
+    average_of_years = float(a)/int(len(years))
+    first_person = int(table[0][2])
+    people_list = []
+    for component in table:
+        if abs(int(component[2]) - average_of_years) < abs(first_person - average_of_years):
+            first_person = int(component[2])
+            people_list[0] = component[1]
+        elif abs(int(component[2]) - average_of_years) == abs(first_person - average_of_years):
+            first_person = int(component[2])
+            people_list.append(component[1])
+    return people_list
+    
