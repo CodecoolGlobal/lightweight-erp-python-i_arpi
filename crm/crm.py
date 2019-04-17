@@ -53,9 +53,7 @@ def add(table):
 
     # your code
     title_list = get_headers()
-    sliced_title_list = title_list[1:]
-
-    common.add(table, sliced_title_list, 'Give new costumers\s data, please!')
+    common.add(table, title_list, 'Give new costumers\s data, please!')
     return table
 
 
@@ -166,7 +164,7 @@ def choose(table):
         raise KeyError("There is no such option.")
 
 def get_options():
-    options = ['Show cosumer\'s data',
+    options = ['Show costumer\'s data',
         'Add new costumers',
         'Remove costumer'
         'Update costumer\'s data',
