@@ -38,15 +38,8 @@ def generate_random(table):
             char_from_special = special_characters[special_index]
             char_from_numbers = numbers[numbers_index]
 
-            end_part += char_from_special
-            if i == 0:
-                fist_part = char_from_abc + char_from_upper + char_from_numbers
-            if i == 1:
-                second_part = char_from_numbers + char_from_upper + char_from_abc
-
-        generated.append(first_part)
-        genrated.append(second_part)
-        generated.append(en_part)
+            generated += char_from_abc + char_from_upper +char_from_numbers + char_from_special
+            
         for row in table:
             if row[0] != generated:
                 return generated
