@@ -28,7 +28,7 @@ def start_module():
         None
     """
 
-    table = data_manager.get_table_from_file('/Users/mac/Documents/My-projects/lightweight-erp-python-i_arpi/accounting/items.csv')
+    table = data_manager.get_table_from_file('accounting/items.csv')
     '''
     for row in table:
         row[1] = int(row[1])
@@ -59,12 +59,12 @@ def choose(table):
         remove(table, id_[0])
     elif option == "4":
         id_ = ui.get_inputs(['id: '], "Give id.")
-        update(table, id_)
+        update(table, id_[0])
     elif option == "5":
         which_year_max(table)
     elif option == "6":
         year = ui.get_inputs(['year: '], "Please, specify a year.")
-        avg_amount(table, year)
+        ui.print_result(avg_amount(table, year[0]), "The average profit for the given year is: ")
     elif option == "0":
         raise EnvironmentError
     else:
@@ -78,8 +78,7 @@ def get_options():
                "Remove an item",
                "Update cash-flow table",
                "Show the year with the highest profit",
-               "Show the average profit in a given year",
-               "Go back to main menu"]
+               "Show the average profit in a given year"]
     return options
 
 
@@ -193,7 +192,9 @@ def avg_amount(table, year):
     """
     same_year_transactions = []
     same_year_transactions_in = []
+    same_year_transactions_in_int = []
     same_year_transactions_out = []
+    same_year_transactions_out_int = []
     income = 0
     loss = 0
     for row in table:
@@ -203,12 +204,16 @@ def avg_amount(table, year):
         if row[4] == 'in':
             same_year_transactions_in.append(row)
     for row in same_year_transactions_in:
-        income += same_year_transactions_in[5]
+        same_year_transactions_in_int.append(row[5])
+    for amount in same_year_transactions_in_int:
+        income += int(amount)
     for row in same_year_transactions:
         if row[4] == 'out':
             same_year_transactions_out.append(row)
     for row in same_year_transactions_out:
-        loss += same_year_transactions_out[5]
+        same_year_transactions_out_int.append(row[5])
+    for amount in same_year_transactions_out_int:
+        loss += int(amount)
     avg_profit = (income - loss) / len(same_year_transactions)
     return avg_profit
 
