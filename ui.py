@@ -158,7 +158,7 @@ def print_menu(title, list_options, exit_message):
 
     print(f'\t{title}:')
     for i in range(6):
-        print(f'\t\t{i+1} {list_options[i]}')
+        print(f'\t\t{"("}{i+1}{")"} {list_options[i]}')
     print(f'\t\t(0) {exit_message}')
 
     
