@@ -9,7 +9,7 @@ import common
 
 
 def start_module():
-    table = data_manager.get_table_from_file("/home/vanelli/Documents/lightweight-erp-python-i_arpi/hr/persons.csv")
+    table = data_manager.get_table_from_file("hr/persons.csv")
     while True:
         ui.print_menu("HR menu", get_options(), "Go back to main menu")
         try:
@@ -17,6 +17,7 @@ def start_module():
         except KeyError as err:
             ui.print_error_message(str(err))
 
+##
 
 def choose(table):
     option = ui.get_inputs(["Please enter a number: "], "")
