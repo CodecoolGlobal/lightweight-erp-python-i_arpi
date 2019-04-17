@@ -141,7 +141,7 @@ def get_subscribed_emails(table):
     return subscribed_emails
 
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -158,8 +158,6 @@ def choose():
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
-    elif option == "0":
-        sys.exit(0)
     else:
         raise KeyError("There is no such option.")
 
@@ -169,8 +167,7 @@ def get_options():
         'Remove costumer'
         'Update costumer\'s data',
         'Show costumer with longest name',
-        'Emails of subscripted costumers', 
-        'Go back to main menu']
+        'Emails of subscripted costumers' ]
     return options
 
 def start_module():
@@ -184,9 +181,9 @@ def start_module():
     """
     table = data_manager.get_table_from_file('crm/customers.csv')
     while True:
-        common.display_menu(get_options, 'CRM Menu')
+        ui.print_menu("CRM Menu", get_options(), "Go back to main menu")
         try:
-            choose()
+            choose(table)
         except KeyError as err:
             ui.print_error_message(str(err))
 
