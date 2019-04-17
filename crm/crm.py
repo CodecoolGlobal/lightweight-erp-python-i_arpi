@@ -24,7 +24,6 @@ def get_headers():
         'Subscribed']
     return headers
 
-
 def show_table(table):
     """
     Display a table
@@ -37,6 +36,8 @@ def show_table(table):
     """
     # your code
     common.show_table(table, get_headers())
+
+    
 
 
 def add(table):
@@ -105,6 +106,15 @@ def get_longest_name_id(table):
         """
 
     # your code
+    longest_so_far = ''
+    for row in table: 
+        if len(row[2]) > len(longest_so_far):
+            longest_so_far = row[2]
+            longests_id = row[1]
+    return longests_so_far
+
+    
+    
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -121,6 +131,14 @@ def get_subscribed_emails(table):
         """
 
     # your code
+    subscribed_emails = []
+    for row in table:
+        subscription = int(row[3])
+        if subscription == 1:
+            email = row[2]
+            email_name = email + ';' + row[1]
+            subscribed_emails.append(email_name)
+    return subscribed_emails
 
 
 def choose():
@@ -131,10 +149,10 @@ def choose():
     elif option == "2":
         add(table)
     elif option == "3":
-        id_ = ui.get_inputs([id], "Give id:")
+        id_ = ui.get_inputs(['id'], "Give id:")
         remove(table, id_)
     elif option == "4":
-        id_ = ui.get_inputs([id], "Give id:")
+        id_ = ui.get_inputs(['id'], "Give id:")
         update(table, id_)
     elif option == "5":
         get_longest_name_id(table)
@@ -172,6 +190,16 @@ def start_module():
         except KeyError as err:
             ui.print_error_message(str(err))
 
+"""
 def get_features():
     
-    feautures = [show_table]
+    features = {"0" : sys.exit(),
+        "1" : show_table(tabel), 
+        "2" : add(table),
+        "3" : id_ = ui.get_inputs(['id_number'], "Give id:") remove(table, id_[0]),
+        "4" : id_ = ui.get_inputs(['id_number'], "Give id:") update(table, id_[0]),
+        "5" : get_longest_name_id(table),
+        "6" : get_subscribed_emails(),
+        }
+        return features
+        """

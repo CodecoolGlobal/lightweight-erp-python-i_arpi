@@ -24,17 +24,69 @@ def start_module():
     Starts this module and displays its menu.
      * User can access default special features from here.
      * User can go back to main menu from here.
-
     Returns:
         None
     """
 
+    table = data_manager.get_table_from_file('items.csv')
+    for row in table:
+        row[1] = int(row[1])
+        row[2] = int(row[2])
+        row[3] = int(row[3])
+        row[5] = int(row[5])
+
+    while True:
+        common.display_menu(get_options, 'Accounting Manager')
+        try:
+            choose()
+        except KeyError as err:
+            ui.print_error_message(str(err))
+
+
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        id_ = ui.get_inputs(['id'], "Give id:")
+        remove(table, id_)
+    elif option == "4":
+        id_ = ui.get_inputs(['id'], "Give id:")
+        update(table, id_)
+    elif option == "5":
+        which_year_max(table)
+    elif option == "6":
+        year = ui.get_inputs(['year: '], "Please, specify a year.")
+        avg_amount(table, year)
+    elif option == "0":
+        sys.exit(0)
+    else:
+        raise KeyError("There is no such option.")
+
+
+
+def get_options():
     options = ["Display cash-flow table",
                "Add an item",
                "Remove an item",
-               "Update cash-flow table"]
+               "Update cash-flow table",
+               "Show the year with the highest profit",
+               "Show the average profit in a given year",
+               "Go back to main menu"]
+    return options
 
-    ui.print_menu("Accounting Manager", options, "Back to main menu")
+
+def get_headers():
+    headers = ["ID",
+               "Month",
+               "Day",
+               "Year",
+               "Type",
+               "Amount"]
+    return headers
 
 
 def show_table(table):
@@ -47,15 +99,9 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'Month', 'Day', 'Year of transaction', 'Type', 'Amount']
-    accounting_data = data_manager.get_table_from_file('items.csv')
-    for datas in accounting_data:
-        datas[1] = int(datas[1])
-        datas[2] = int(datas[2])
-        datas[3] = int(datas[3])
-        datas[5] = int(datas[5])
-    ui.print_table(accounting_data, title_list)
 
+    common.show_table(table, get_headers())
+    
 
 
 def add(table):
@@ -69,11 +115,7 @@ def add(table):
         list: Table with a new record
     """
 
-    input_data = []
-    input_data[0] = common.generate_random(table)
-    ui.get_inputs(['Month of the transaction: ', 'Day of the transaction: ', 'Year of the transaction: ', 'Type of the transaction (in or out): ', 'Amount of transaction in USD: '], 'Please provide data for adding a transaction')
-    input_data.append(inputs)
-    table.append(input_data)
+    common.add(table, get_headers, "Give new costumer's data, please!")
     return table
 
 
@@ -89,10 +131,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    ui.get_inputs(['ID: '], 'Please, type in the ID of the transaction which you want to delete.')
-    for row in table:
-        if inputs[0] == row[0]:
-            table.remove(row)
+    common.remove(table, id_)
     return table
 
 
@@ -107,11 +146,17 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
+
+    common.update(table, id_, get_headers())
+    return table
+
+    '''
     table = data_manager.get_table_from_file('items.csv')
     ui.get_inputs(['ID: ', 'Which item do you want to change: ', 'What data would you like to store: '], 'Please, type in the ID of the transaction which you want to update.')
     for row in table:
         row[inputs[1]] = inputs[2]
     return table
+    '''
 
 
 # special functions:
@@ -145,8 +190,8 @@ def avg_amount(table, year):
     same_year_transactions = []
     same_year_transactions_in = []
     same_year_transactions_out = []
-    count = 0
-    losss = 0
+    income = 0
+    loss = 0
     for row in table:
         if row[3] == year:
             same_year_transactions.append(row)
@@ -154,11 +199,12 @@ def avg_amount(table, year):
         if row[4] == 'in':
             same_year_transactions_in.append(row)
     for row in same_year_transactions_in:
-        count += same_year_transactions_in[5]
+        income += same_year_transactions_in[5]
     for row in same_year_transactions:
         if row[4] == 'out':
             same_year_transactions_out.append(row)
+    for row in same_year_transactions_out:
         loss += same_year_transactions_out[5]
-    avg = (count - loss) / len(same_year_transactions)
-    return avg
+    avg_profit = (income - loss) / len(same_year_transactions)
+    return avg_profit
 
