@@ -62,10 +62,10 @@ def print_table(table, title_list):
 
     table = make_table(table, title_list)
     new_table = transform_tables(table)                                        
-    dash_char = "-" 
+    dash_char = "=" 
     right_slash = "/"
     left_slash = "\\"
-    separator = "|"
+    separator = "‖"
     
     longest_titles = len_of_colums(table)
     separator_line = []
