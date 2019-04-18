@@ -84,7 +84,8 @@ def print_table(table, title_list):
             pass
         else:
             print(f"\n{list_separator_line}")
-        print(end = separator)
+        #print(end = separator)
+        print(separator, end="")
 
         for enum, item in enumerate(lists):
             print(item.center(longest_titles[enum]), end= separator)

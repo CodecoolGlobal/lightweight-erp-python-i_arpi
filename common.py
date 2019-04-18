@@ -42,6 +42,7 @@ def generate_random(table):
 
         for row in table:
             if row[0] != generated:
+                #looks only the first row!!!
                 return generated
 
 def choose(features):
