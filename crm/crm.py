@@ -109,6 +109,7 @@ def get_longest_name_id(table):
 
     # your code
     longest_so_far = ''
+<<<<<<< HEAD
     longests = []
     for row in table: 
         name = row[1].strip()
@@ -128,6 +129,14 @@ def get_longest_name_id(table):
             smallest = longest[0]
             smallest_id = longest[1]
     return smallest_id
+=======
+    longest_id = ""
+    for row in table: 
+        if len(row[1]) > len(longest_so_far):
+            longest_so_far = row[1]
+            longest_id = row[0]
+    return longest_id
+>>>>>>> da3ae679a05460e85e26624716ff54c80eb90de3
 
     
     

@@ -66,7 +66,7 @@ def remove(table, id_):
     
     
 def update(table, id_, label_list):
-    updated_row_id = [generate_random(table)]
+    updated_row_id = [str(id_).strip()]
     for row in table:
         if str(row[0]).strip() == str(id_).strip():
             table.remove(row)
