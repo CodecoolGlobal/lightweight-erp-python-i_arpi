@@ -109,11 +109,25 @@ def get_longest_name_id(table):
 
     # your code
     longest_so_far = ''
+    longests = []
     for row in table: 
-        if len(row[2]) > len(longest_so_far):
-            longest_so_far = row[2]
-            longests_id = row[1]
-    return longest_so_far
+        name = row[1].strip()
+        if len(name) > len(longest_so_far):
+            longest_so_far = name
+            longests_id = row[0]
+    longests.append[longest_so_far]
+    for row in table:
+        check_name = row[1].strip()
+        check_id = row[0]
+        if len(longest_so_far) == len(check_name):
+            longests.append(check_name, check_id)
+    smallest = ''
+    smallest_id = ''
+    for longest in longest:
+        if longest[0] < smallest:
+            smallest = longest[0]
+            smallest_id = longest[1]
+    return smallest_id
 
     
     
