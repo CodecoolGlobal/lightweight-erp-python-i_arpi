@@ -73,12 +73,14 @@ def remove(table, id_):
     
 def update(table, id_, label_list):
     updated_row_id = [str(id_).strip()]
-    for row in table:
-        if str(row[0]).strip() == str(id_).strip():
-            table.remove(row)
+    for i in range(len(table)):
+        row = table[i]
+        old_id = row[0].strip()
+        id_ = str(id_.strip())
+        if old_id == id_:
             updating_record = ui.get_inputs(label_list[1:], 'Give new data:')
             updated_row = updated_row_id + updating_record
-            table.append(updated_row)
+            table[i] = updated_row
         
 
 
