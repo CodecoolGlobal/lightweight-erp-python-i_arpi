@@ -4,6 +4,14 @@ implement commonly used functions here
 import ui
 import random
 
+def is_random_already_used(table, random):
+    is_used = False
+    for row in table:
+        if row[0] == random:
+                #looks only the first row!!!
+            is_id_already_used = True
+    return is_used
+        
 
 def generate_random(table):
     """
@@ -39,11 +47,8 @@ def generate_random(table):
             char_from_numbers = numbers[numbers_index]
 
             generated += char_from_abc + char_from_upper +char_from_numbers + char_from_special
-
-        for row in table:
-            if row[0] != generated:
-                #looks only the first row!!!
-                return generated
+        if is_random_already_used (table, generated) == False:
+            return generated
 
 def choose(features):
     inputs = ui.get_inputs(["Please enter a number: "], "")
