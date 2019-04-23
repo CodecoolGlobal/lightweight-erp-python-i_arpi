@@ -35,7 +35,7 @@ def show_table(table):
         None
     """
     # your code
-    ui.print_table(table, get_headers())
+    common.show_table(table, get_headers())
 
     
 
@@ -54,10 +54,10 @@ def add(table):
     # your code
     title_list = get_headers()
     common.add(table, title_list, 'Give new costumers\'s data, please!')
-    return table
+    
 
 
-def remove(table, id_):
+def remove(table, id_=None):
     """
     Remove a record with a given id from the table.
 
@@ -70,12 +70,13 @@ def remove(table, id_):
     """
 
     # your code
+    id_ = ui.get_inputs(['id'], "Give id:")[0]
     common.remove(table, id_)
-    ui.print_table(table, get_headers())
+    
     
 
 
-def update(table, id_):
+def update(table, id_=None):
     """
     Updates specified record in the table. Ask users for new data.
 
@@ -88,6 +89,7 @@ def update(table, id_):
     """
 
     # your code
+    id_ = ui.get_inputs(['id'], "Give id:")[0]
     common.update(table, id_, get_headers())
     
 
@@ -129,6 +131,12 @@ def get_longest_name_id(table):
             smallest_id = longest[1]
     return smallest_id
 
+def show_longest_name_id(table):
+    ui.print_result(get_longest_name_id(table), 'Id of the longest name: ')
+
+def show_subscribed_emails(table):
+    ui.print_result(get_subscribed_emails(table), 'Subscribed emails are: ')
+
     
     
 
@@ -156,6 +164,7 @@ def get_subscribed_emails(table):
             subscribed_emails.append(email_name)
     return subscribed_emails
 
+
 def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
@@ -178,6 +187,9 @@ def choose(table):
     else:
         raise KeyError("There is no such option.")
 
+def go_to_main_menu(table):
+    return 1
+
 def get_options():
     options = ['Show costumer\'s data',
         'Add new costumers',
@@ -186,6 +198,17 @@ def get_options():
         "Show costumer's ID with the longest name",
         'Emails of subscripted costumers' ]
     return options
+
+def get_features(table):
+    features = {"0" : go_to_main_menu(table),
+        "1" : show_table(table), 
+        "2" : add(table),
+        "3" : remove(table),
+        "4" : update(table),
+        "5" : show_longest_name_id(table),
+        "6" : show_subscribed_emails(table)
+        }
+    return features
 
 def start_module():
     """
@@ -203,19 +226,9 @@ def start_module():
             if choose(table) == 1:
                 return
         except KeyError as err:
-            ui.print_error_message(str(err))
+            ui.print_error_message('No such option')
 
 
-"""
-def get_features():
+
+
     
-    features = {"0" : sys.exit(),
-        "1" : show_table(tabel), 
-        "2" : add(table),
-        "3" : id_ = ui.get_inputs(['id_number'], "Give id:") remove(table, id_[0]),
-        "4" : id_ = ui.get_inputs(['id_number'], "Give id:") update(table, id_[0]),
-        "5" : get_longest_name_id(table),
-        "6" : get_subscribed_emails(),
-        }
-        return features
-        """
