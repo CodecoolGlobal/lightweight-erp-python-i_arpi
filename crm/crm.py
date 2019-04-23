@@ -174,7 +174,7 @@ def choose(table):
     elif option == "6":
         ui.print_result(get_subscribed_emails(table), "The customers who has subscribed to the newsletter are: ")
     elif option == "0":
-        raise EnvironmentError
+        return 1
     else:
         raise KeyError("There is no such option.")
 
@@ -200,11 +200,11 @@ def start_module():
     while True:
         ui.print_menu("CRM Menu", get_options(), "Go back to main menu")
         try:
-            choose(table)
+            if choose(table) == 1:
+                return
         except KeyError as err:
             ui.print_error_message(str(err))
-        except EnvironmentError:
-            return
+
 
 """
 def get_features():
