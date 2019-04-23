@@ -4,6 +4,7 @@ implement commonly used functions here
 import ui
 import random
 
+
 def is_random_already_used(table, random):
     is_used = False
     for row in table:
@@ -50,10 +51,17 @@ def generate_random(table):
         if is_random_already_used (table, generated) == False:
             return generated
 
-def choose(features):
+def choose(table, module_name):
+    
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
-    features[option]
+    module = __import__(module_name, fromlist = [module_name])
+    features = module.get_features(table)
+    module.features.get(option)
+
+
+def show_table(table, title_list):
+    ui.print_table(table, title_list)
 
 
 def add(table, label_list, title):
