@@ -150,14 +150,6 @@ def update(table, id_):
     common.update(table, id_, get_headers())
     return table
 
-    '''
-    table = data_manager.get_table_from_file('items.csv')
-    ui.get_inputs(['ID: ', 'Which item do you want to change: ', 'What data would you like to store: '], 'Please, type in the ID of the transaction which you want to update.')
-    for row in table:
-        row[inputs[1]] = inputs[2]
-    return table
-    '''
-
 
 # special functions:
 # ------------------
