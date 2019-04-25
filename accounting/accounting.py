@@ -29,27 +29,14 @@ def start_module():
     """
 
     table = data_manager.get_table_from_file('accounting/items.csv')
-    '''
-    for row in table:
-        row[1] = int(row[1])
-        row[2] = int(row[2])
-        row[3] = int(row[3])
-        row[5] = int(row[5])
-    '''
 
     while True:
         ui.print_menu('Accounting Manager', get_options(), 'Back to main menu')
         try:
-            if choose(table) != 'return':
-                choose(table)
-            else:
+            if choose(table) == 'return':
                 return
         except KeyError as err:
             ui.print_error_message(str(err))
-            '''
-        except EnvironmentError:
-            return
-            '''
 
 
 def choose(table):
@@ -77,7 +64,6 @@ def choose(table):
             ui.print_error_message(message)
     elif option == "0":
         return "return"
-        # raise EnvironmentError
     else:
         raise KeyError("There is no such option.")
 
