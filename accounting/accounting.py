@@ -40,11 +40,16 @@ def start_module():
     while True:
         ui.print_menu('Accounting Manager', get_options(), 'Back to main menu')
         try:
-            choose(table)
+            if choose(table) != 'return':
+                choose(table)
+            else:
+                return
         except KeyError as err:
             ui.print_error_message(str(err))
+            '''
         except EnvironmentError:
             return
+            '''
 
 
 def choose(table):
@@ -61,12 +66,18 @@ def choose(table):
         id_ = ui.get_inputs(['id: '], "Give id.")
         update(table, id_[0])
     elif option == "5":
-        which_year_max(table)
+        ui.print_result(which_year_max(table), 'The year with the highest profit is: ')
     elif option == "6":
-        year = ui.get_inputs(['year: '], "Please, specify a year.")
-        ui.print_result(avg_amount(table, year[0]), "The average profit for the given year is: ")
+        try: 
+            year = ui.get_inputs(['year: '], "Please, specify a year.")
+            year_int = int(year[0])
+            ui.print_result(avg_amount(table, year_int), "The average profit for the given year is: ")
+        except ZeroDivisionError:
+            message = "Sorry, no transactions in that year."
+            ui.print_error_message(message)
     elif option == "0":
-        raise EnvironmentError
+        return "return"
+        # raise EnvironmentError
     else:
         raise KeyError("There is no such option.")
 
@@ -135,7 +146,7 @@ def remove(table, id_):
     """
 
     common.remove(table, id_)
-    ui.print_table(table, get_headers())
+    return table
 
 
 def update(table, id_):
@@ -176,8 +187,22 @@ def which_year_max(table):
         number
     """
 
-    # your code
+    year_profit = {}
+    for row in table:
+        year = row[3]
+        if year in year_profit and row[4] == 'in':
+            year_profit[year] += int(row[5])
+        elif year in year_profit and row[4] == 'out':
+            year_profit[year] -= int(row[5])
+        elif year not in year_profit and row[4] == 'in':
+            year_profit.update({year: int(row[5])})
+        elif year not in year_profit and row[4] == 'out':
+            row[5] = -int(row[5])
+            year_profit.update({year: row[5]})
+    highest_year = max(year_profit, key=lambda year: year_profit[year])
+    return int(highest_year)
 
+        
 
 def avg_amount(table, year):
     """
@@ -190,30 +215,29 @@ def avg_amount(table, year):
     Returns:
         number
     """
-    same_year_transactions = []
-    same_year_transactions_in = []
-    same_year_transactions_in_int = []
-    same_year_transactions_out = []
-    same_year_transactions_out_int = []
-    income = 0
-    loss = 0
+    
+    profit = 0
+    item_count = 0
     for row in table:
-        if row[3] == year:
-            same_year_transactions.append(row)
-    for row in same_year_transactions:
-        if row[4] == 'in':
-            same_year_transactions_in.append(row)
-    for row in same_year_transactions_in:
-        same_year_transactions_in_int.append(row[5])
-    for amount in same_year_transactions_in_int:
-        income += int(amount)
-    for row in same_year_transactions:
-        if row[4] == 'out':
-            same_year_transactions_out.append(row)
-    for row in same_year_transactions_out:
-        same_year_transactions_out_int.append(row[5])
-    for amount in same_year_transactions_out_int:
-        loss += int(amount)
-    avg_profit = (income - loss) / len(same_year_transactions)
-    return avg_profit
+        row[3] = int(row[3])
+        if row[3] == year and row[4] == 'in':
+            profit += int(row[5])
+            item_count += 1
+        elif row[3] == year and row[4] == 'out':
+            profit -= int(row[5])
+            item_count += 1
+    return profit / item_count
+
+    
+
+   
+    
+    
+
+         
+    
+        
+
+
+
 
