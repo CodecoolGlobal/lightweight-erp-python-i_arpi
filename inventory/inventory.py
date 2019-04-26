@@ -33,11 +33,10 @@ def start_module():
     while True:
         ui.print_menu('Inventory Module', get_options(), 'Back to main menu')
         try:
-            choose(table)
+            if choose(table) == 'return':
+                return
         except KeyError as err:
             ui.print_error_message(str(err))
-        except EnvironmentError:
-            return
 
 
 def choose(table):
@@ -54,11 +53,11 @@ def choose(table):
         id_ = ui.get_inputs(['id: '], "Give id.")
         update(table, id_[0])
     elif option == "5":
-        get_available_items(table)
+        ui.print_result(get_available_items(table), 'The still available items are: ')
     elif option == "6":
-        get_average_durability_by_manufacturers(table)
+        ui.print_result(get_average_durability_by_manufacturers(table), 'The average durability times by manufacturers are: ')
     elif option == "0":
-        raise EnvironmentError
+        return 'return'
     else:
         raise KeyError("There is no such option.")
 
@@ -124,7 +123,7 @@ def remove(table, id_):
     """
 
     common.remove(table, id_)
-    ui.print_table(table, get_headers())
+    return table
 
 
 def update(table, id_):
@@ -156,8 +155,15 @@ def get_available_items(table):
     Returns:
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
+    available = []
+    year = 2016
+    for row in table:
+        row[3], row[4] = int(row[3]), int(row[4])
+        if (row[3] + row[4]) >= year:
+            available.append(row)
+    return available
 
-    # your code
+
 
 
 def get_average_durability_by_manufacturers(table):
@@ -171,4 +177,19 @@ def get_average_durability_by_manufacturers(table):
         dict: a dictionary with this structure: { [manufacturer] : [avg] }
     """
 
-    # your code
+    manufacturers = set(row[2] for row in table)
+    result = {}
+    for item in manufacturers:
+        sum_durability = 0
+        count = 0
+        for row in table:
+            if item == row[2]:
+                row[4] = int(row[4])
+                sum_durability += row[4]
+                count += 1
+                avg_durability = float(sum_durability / count)
+                result.update({row[2]: avg_durability})
+    return result
+
+
+

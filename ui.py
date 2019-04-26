@@ -108,9 +108,8 @@ def print_result(result, label):
     # your code
     if type(result) == list:
         print(label)
-        for element in result:
-            print(f'{element}, ')
-            print("")
+        print(result)
+        print("")
     elif type(result) == dict:
         print(label)
         for key, value in result.items():
