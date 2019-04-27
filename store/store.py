@@ -33,11 +33,11 @@ def start_module():
     while True:
         ui.print_menu('Store module', get_options(), 'Back to main menu')
         try:
-            choose(table)
+            if choose(table) == 'return':
+                return
         except KeyError as err:
             ui.print_error_message(str(err))
-        except EnvironmentError:
-            return
+        
 
 
 def choose(table):
@@ -54,11 +54,16 @@ def choose(table):
         id_ = ui.get_inputs(['id: '], "Give id.")
         update(table, id_[0])
     elif option == "5":
-        get_counts_by_manufacturers(table)
+        ui.print_result(get_counts_by_manufacturers(table), 'The amount of games available per genre in store by manufacturers are: ')
     elif option == "6":
-        get_average_by_manufacturer(table, manufacturer)    
+        try:
+            manufacturer = ui.get_inputs(['manufacturer: '], "Please, specify the manufacturer.")
+            ui.print_result(get_average_by_manufacturer(table, manufacturer[0])  , 'The average amount of games per genre in stock by the given manufacturer is: ')
+        except ZeroDivisionError:
+            message = "Sorry, no manufacturer by that name."
+            ui.print_error_message(message)
     elif option == "0":
-        raise EnvironmentError
+        return 'return'
     else:
         raise KeyError("There is no such option.")
 
@@ -68,8 +73,8 @@ def get_options():
                "Add an item",
                "Remove an item",
                "Update store table",
-               "Show available genres in store by manufacturer",
-               "Show average amount of games in stock by manufacturer"]
+               "Show the amount of games per genre available in store by manufacturers",
+               "Show average amount of games per genre in stock by given manufacturer"]
     return options
 
 
@@ -124,7 +129,6 @@ def remove(table, id_):
     """
 
     common.remove(table, id_)
-    ui.print_table(table, get_headers())
 
 
 def update(table, id_):
@@ -156,6 +160,26 @@ def get_counts_by_manufacturers(table):
     Returns:
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
+    
+    '''
+    games = {}
+    manufacturers = set(row[2] for row in table)
+    for manufacturer in manufacturers:
+        count = 0
+        for row in table:
+            if manufacturer == row[2]:
+                count += 1
+                games.update({row[2]: count})
+    return games
+    '''
+
+    games = {}
+    for row in table:
+        if row[2] in games.keys():
+            games[row[2]] += 1
+        else:
+            games[row[2]] = 1
+    return games
 
 
 def get_average_by_manufacturer(table, manufacturer):
@@ -169,5 +193,12 @@ def get_average_by_manufacturer(table, manufacturer):
     Returns:
          number
     """
+   
+    count = 0
+    games = 0
+    for row in table:
+        if manufacturer == row[2]:
+            games += int(row[4])
+            count += 1
+    return games / count
 
-    # your code
