@@ -34,11 +34,10 @@ def start_module():
     while True:
         ui.print_menu('Sales module', get_options(), 'Back to main menu')
         try:
-            choose(table)
+            if choose(table) == 'return':
+                return
         except KeyError as err:
             ui.print_error_message(str(err))
-        except EnvironmentError:
-            return
 
 
 def choose(table):
@@ -55,11 +54,12 @@ def choose(table):
         id_ = ui.get_inputs(['id: '], "Give id.")
         update(table, id_[0])
     elif option == "5":
-        get_lowest_price_item_id(table)
+        ui.print_result(get_lowest_price_item_id(table), 'The ID of the game sold for the lowest price is: ')
     elif option == "6":
-        get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+        dates= ui.get_inputs(['month from: ', 'day from: ', 'year from: ', 'month to: ', 'day to: ', 'year to: '], "Please specify the time intervallum.")
+        ui.print_result(get_items_sold_between(table, int(dates[0]), int(dates[1]), int(dates[2]), int(dates[3]), int(dates[4]), int(dates[5])), 'The games sold between the two given dates are: ')
     elif option == "0":
-        raise EnvironmentError
+        return 'return'
     else:
         raise KeyError("There is no such option.")
 
@@ -126,7 +126,7 @@ def remove(table, id_):
     """
 
     common.remove(table, id_)
-    ui.print_table(table, get_headers())
+    return table
 
 
 def update(table, id_):
@@ -160,7 +160,14 @@ def get_lowest_price_item_id(table):
          string: id
     """
 
-    # your code
+    lowest = int(table[0][2])
+    for row in table:
+        row[2] = int(row[2])
+        if lowest > row[2]:
+            lowest = row[2]
+            id = row[0]
+    return id
+
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
@@ -179,5 +186,13 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
+    
+    result = []
+    for row in table:
+        row[2], row[3], row[4], row[5] = int(row[2]), int(row[3]), int(row[4]), int(row[5])
+        if (row[5] >= year_from and row[3] > month_from) and (row[5] <= year_to and row[3] < month_to):
+            result.append(row)
+        elif (row[5] >= year_from and row[3] == month_from and row[4] > day_from) and (row[5] <= year_to and row[3] == year_to and row[4] < year_to): 
+            result.append(row)
+    return result
 
-    # your code
