@@ -181,7 +181,7 @@ def get_name_by_id(id):
         str: the name of the customer
     """
 
-    table = data_manager.get_table_from_file('crm/costumers.csv')
+    table = data_manager.get_table_from_file('crm/customers.csv')
     return get_name_by_id_from_table(table, id)
 
 
