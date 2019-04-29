@@ -298,8 +298,8 @@ def get_the_sum_of_prices(item_ids):
     Returns:
         number: the sum of the items' prices
     """
-
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    
 
 
 def get_the_sum_of_prices_from_table(table, item_ids):
