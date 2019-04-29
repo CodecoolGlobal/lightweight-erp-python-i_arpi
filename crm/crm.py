@@ -17,18 +17,12 @@ import data_manager
 import common
 
 
-def start_module():
-    """
-    Starts this module and displays its menu.
-     * User can access default special features from here.
-     * User can go back to main menu from here.
-
-    Returns:
-        None
-    """
-
-    # your code
-
+def get_headers():
+    headers = [ 'Id ',
+        'Name ',
+        'Email ',
+        'Subscribed ']
+    return headers
 
 def show_table(table):
     """
@@ -40,8 +34,10 @@ def show_table(table):
     Returns:
         None
     """
-
     # your code
+    common.show_table(table, get_headers())
+
+    
 
 
 def add(table):
@@ -56,11 +52,12 @@ def add(table):
     """
 
     # your code
+    title_list = get_headers()
+    common.add(table, title_list, 'Give new costumers\'s data, please!')
+    
 
-    return table
 
-
-def remove(table, id_):
+def remove(table, id_=None):
     """
     Remove a record with a given id from the table.
 
@@ -73,11 +70,13 @@ def remove(table, id_):
     """
 
     # your code
+    id_ = ui.get_inputs(['id'], "Give id:")[0]
+    common.remove(table, id_)
+    
+    
 
-    return table
 
-
-def update(table, id_):
+def update(table, id_=None):
     """
     Updates specified record in the table. Ask users for new data.
 
@@ -90,8 +89,9 @@ def update(table, id_):
     """
 
     # your code
-
-    return table
+    id_ = ui.get_inputs(['id'], "Give id:")[0]
+    common.update(table, id_, get_headers())
+    
 
 
 # special functions:
@@ -110,6 +110,35 @@ def get_longest_name_id(table):
         """
 
     # your code
+    longest_so_far = ''
+    longests = []
+    for row in table: 
+        name = row[1].strip()
+        if len(name) > len(longest_so_far):
+            longest_so_far = name
+            longest_id = row[0]
+    longests.append((longest_so_far, longest_id))
+    for row in table:
+        check_name = row[1].strip()
+        check_id = row[0]
+        if len(longest_so_far) == len(check_name):
+            longests.append((check_name, check_id))
+    smallest = longests[0][0]
+    smallest_id = longests[0][1]
+    for longest in longests:
+        if longest[0] > smallest:
+            smallest = longest[0]
+            smallest_id = longest[1]
+    return smallest_id
+
+def show_longest_name_id(table):
+    ui.print_result(get_longest_name_id(table), 'Id of the longest name: ')
+
+def show_subscribed_emails(table):
+    ui.print_result(get_subscribed_emails(table), 'Subscribed emails are: ')
+
+    
+    
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -128,8 +157,8 @@ def get_subscribed_emails(table):
     # your code
 
 
+
 # functions supports data analyser
-# --------------------------------
 
 
 def get_name_by_id(id):
@@ -160,4 +189,81 @@ def get_name_by_id_from_table(table, id):
         str: the name of the customer
     """
 
-    # your code
+  
+    subscribed_emails = []
+    for row in table:
+        subscription = int(row[3])
+        if subscription == 1:
+            email = row[2]
+            email_name = email + ';' + row[1]
+            subscribed_emails.append(email_name)
+    return subscribed_emails
+
+
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        id_ = ui.get_inputs(['id'], "Give id:")[0]
+        remove(table, id_)
+    elif option == "4":
+        id_ = ui.get_inputs(['id'], "Give id:")[0]
+        update(table, id_)
+    elif option == "5":
+        ui.print_result(get_longest_name_id(table), "The customer's ID with the longest name is: ")
+    elif option == "6":
+        ui.print_result(get_subscribed_emails(table), "The customers who has subscribed to the newsletter are: ")
+    elif option == "0":
+        return 1
+    else:
+        raise KeyError("There is no such option.")
+
+def go_to_main_menu(table):
+    return 1
+
+def get_options():
+    options = ['Show costumer\'s data',
+        'Add new costumers',
+        'Remove costumer',
+        'Update costumer\'s data',
+        "Show costumer's ID with the longest name",
+        'Emails of subscripted costumers' ]
+    return options
+
+def get_features(table):
+    features = {"0" : go_to_main_menu(table),
+        "1" : show_table(table), 
+        "2" : add(table),
+        "3" : remove(table),
+        "4" : update(table),
+        "5" : show_longest_name_id(table),
+        "6" : show_subscribed_emails(table)
+        }
+    return features
+
+def start_module():
+    """
+    Starts this module and displays its menu.
+     * User can access default special features from here.
+     * User can go back to main menu from here.
+
+    Returns:
+        None
+    """
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    while True:
+        ui.print_menu("CRM Menu", get_options(), "Go back to main menu")
+        try:
+            if choose(table) == 1:
+                return
+        except KeyError as err:
+            ui.print_error_message('No such option')
+
+
+
+
+    

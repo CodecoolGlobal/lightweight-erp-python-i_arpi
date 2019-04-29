@@ -12,7 +12,7 @@ from hr import hr
 from inventory import inventory
 # Accounting module
 from accounting import accounting
-# Sales module
+# Sales module3
 from sales import sales
 # Customer Relationship Management (CRM) module
 from crm import crm
