@@ -154,6 +154,7 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
+    return 'name'
     # your code
 
 
