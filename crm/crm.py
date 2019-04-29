@@ -156,7 +156,14 @@ def get_subscribed_emails(table):
 
     return 'name'
     # your code
-
+    subscribed_emails = []
+    for row in table:
+        subscription = int(row[3])
+        if subscription == 1:
+            email = row[2]
+            email_name = email + ';' + row[1]
+            subscribed_emails.append(email_name)
+    return subscribed_emails
 
 
 # functions supports data analyser
@@ -174,7 +181,9 @@ def get_name_by_id(id):
         str: the name of the customer
     """
 
-    # your code
+    table = data_manager.get_table_from_file('crm/costumers.csv')
+    return get_name_by_id_from_table(table, id)
+
 
 
 
@@ -189,17 +198,11 @@ def get_name_by_id_from_table(table, id):
     Returns:
         str: the name of the customer
     """
-
-  
-    subscribed_emails = []
+    name = None
     for row in table:
-        subscription = int(row[3])
-        if subscription == 1:
-            email = row[2]
-            email_name = email + ';' + row[1]
-            subscribed_emails.append(email_name)
-    return subscribed_emails
-
+        if str(row[0]).strip() == id.strip():
+            name = row[1]
+    return name
 
 def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
