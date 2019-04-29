@@ -5,6 +5,10 @@ def make_table(table, title_list):
     return tables
 
 def transform_tables(table):
+    for row in table:
+        for i in range(len(row)):
+            if type(row[i]) == int:
+                row[i] = str(row[i])
     new_table = list(zip(*table))
     #print(new_table)
     return new_table
