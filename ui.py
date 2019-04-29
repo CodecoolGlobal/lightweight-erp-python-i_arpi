@@ -1,10 +1,17 @@
 """ User Interface (UI) module """
 
 def make_table(table, title_list): 
-    titles = title_list
-    first_table = table
-    tables = [titles] + first_table  
+    tables = [title_list] + table 
     return tables
+
+def transform_tables(table):
+    new_table = list(zip(*table))
+    #print(new_table)
+    return new_table
+
+def len_of_table(new_table):
+    lenght_of_table = len(new_table[0])
+    return lenght_of_table
 
 def len_of_colums(new_table):
     lenght_of_items = []
@@ -28,16 +35,7 @@ def len_of_colums(new_table):
         count += 1
         
     return(longest_titles)
-
-def len_of_table(new_table):
-    lenght_of_table = len(new_table)
-    return lenght_of_table
-
-def transform_tables(table):
-    new_table = list(zip(*table))
-    #print(new_table)
-    return new_table
-                                              
+                                        
 def print_table(table, title_list):   
     """
     Prints table with data.
@@ -67,7 +65,7 @@ def print_table(table, title_list):
     left_slash = "\\"
     separator = "‖"
     
-    longest_titles = len_of_colums(table)
+    longest_titles = len_of_colums(new_table)
     separator_line = []
 
     for i in longest_titles:
