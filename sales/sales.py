@@ -69,6 +69,9 @@ def choose(table):
     elif option == "10":
         item_ids = ui.get_inputs(['id: ', 'id: ', 'id: ', 'id: '], "Give the ids.")
         ui.print_result(get_the_sum_of_prices_from_table(table, item_ids), 'The overall price of the games with the given IDs: ')
+    elif option == "11":
+        id = ui.get_inputs(['id: '], "Give sales id.")
+        ui.print_result(get_customer_id_by_sale_id_from_table(table, id[0]), 'The ID of the customer with the given sale ID is: ')
     elif option == "0":
         return 'return'
     else:
@@ -85,7 +88,8 @@ def get_options():
                "Show the name of a game by a given ID",
                "Show the ID of the game sold most recently",
                "Show the title of the game sold most recently",
-               "Show the overall price of the games with the given IDs"]
+               "Show the overall price of the games with the given IDs",
+               "Show the ID of the customer with the given sale ID"]
     return options
 
 
@@ -456,7 +460,14 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    try:
+        for row in table:
+            if sale_id == row[0]:
+                result = row[6]
+        return result
+    except UnboundLocalError:
+        return None
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -471,7 +482,13 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    try:
+        for row in table:
+            if sale_id == row[0]:
+                result = row[6]
+        return result
+    except UnboundLocalError:
+        return None
 
 
 def get_all_customer_ids():
