@@ -257,6 +257,59 @@ def get_item_id_sold_last():
     """
 
     # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    
+    max = 0
+
+    for i in table:
+        i[5] = int(i[5])
+        #print(i[5])
+        if int(i[5]) > max:
+            max = i[5]
+
+    #print(max)
+    
+    max_year_games = []
+
+    for i in table:
+        if int(i[5]) == max:
+            max_year_games.append(i)
+        
+    #print(max_year_games)
+    
+    ######################
+    max = 0
+    for i in max_year_games:
+        i[3] = int(i[3])
+        #print(i[3])
+        if int(i[3]) > max:
+            max = i[3]
+
+    max_month_games = []
+
+    for i in max_year_games:
+        if int(i[3]) == max:
+            max_month_games.append(i)
+    #print(max_month_games) 
+
+    ######################
+    max = 0
+    for i in max_month_games:
+        i[4] = int(i[4])
+        #print(i[4])
+        if int(i[4]) > max:
+            max = i[4]
+
+    max_day_games = []
+
+    for i in max_month_games:
+        if int(i[4]) == max:
+            max_day_games.append(i)
+    
+    #print(max_day_games)
+    #print(max_day_games[0][0])
+    return(max_day_games[0][0])
+    #return "kH34Ju#&"
 
 
 def get_item_id_sold_last_from_table(table):
