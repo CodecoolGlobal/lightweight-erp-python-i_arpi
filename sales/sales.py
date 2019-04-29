@@ -59,6 +59,9 @@ def choose(table):
     elif option == "6":
         dates= ui.get_inputs(['month from: ', 'day from: ', 'year from: ', 'month to: ', 'day to: ', 'year to: '], "Please specify the time intervallum.")
         ui.print_result(get_items_sold_between(table, int(dates[0]), int(dates[1]), int(dates[2]), int(dates[3]), int(dates[4]), int(dates[5])), 'The games sold between the two given dates are: ')
+    elif option == "7":
+        id= ui.get_inputs(['id: '], "Give id.")
+        ui.print_result(get_title_by_id_from_table(table, id[0]), 'The name of the game with the given ID is: ')
     elif option == "0":
         return 'return'
     else:
@@ -71,7 +74,8 @@ def get_options():
                "Remove an item",
                "Update sales table",
                "Show the ID of the game sold for the lowest price",
-               "Show the games sold between two given dates"]
+               "Show the games sold between two given dates",
+               "Show the name of a game by a given ID"]
     return options
 
 
@@ -218,7 +222,11 @@ def get_title_by_id(id):
         str: the title of the item
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    for row in table:
+        if id == row[0]:
+            return row[1]
+
 
 
 def get_title_by_id_from_table(table, id):
@@ -234,7 +242,9 @@ def get_title_by_id_from_table(table, id):
         str: the title of the item
     """
 
-    # your code
+    for row in table:
+        if id == row[0]:
+            return row[1]
 
 
 def get_item_id_sold_last():
