@@ -66,6 +66,9 @@ def choose(table):
         ui.print_result(get_item_id_sold_last_from_table(table), 'The ID of the game sold most recently is: ')
     elif option == "9":
         ui.print_result(get_item_title_sold_last_from_table(table), 'The title of the game sold most recently is: ')
+    elif option == "10":
+        item_ids = ui.get_inputs(['id: ', 'id: ', 'id: ', 'id: '], "Give the ids.")
+        ui.print_result(get_the_sum_of_prices_from_table(table, item_ids), 'The overall price of the games with the given IDs: ')
     elif option == "0":
         return 'return'
     else:
@@ -81,7 +84,8 @@ def get_options():
                "Show the games sold between two given dates",
                "Show the name of a game by a given ID",
                "Show the ID of the game sold most recently",
-               "Show the title of the game sold most recently"]
+               "Show the title of the game sold most recently",
+               "Show the overall price of the games with the given IDs"]
     return options
 
 
@@ -203,9 +207,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     for row in table:
         row[2], row[3], row[4], row[5] = int(row[2]), int(row[3]), int(row[4]), int(row[5])
         if (row[5] >= year_from and row[3] > month_from) and (row[5] <= year_to and row[3] < month_to):
-            result.append(row)
+            result.append(row[:6])
         elif (row[5] >= year_from and row[3] == month_from and row[4] > day_from) and (row[5] <= year_to and row[3] == year_to and row[4] < year_to): 
-            result.append(row)
+            result.append(row[:6])
     return result
 
 
@@ -230,7 +234,9 @@ def get_title_by_id(id):
     """
 
     table = data_manager.get_table_from_file('sales/sales.csv')
-    get_title_by_id_from_table(table, id)
+    for row in table:
+        if id == row[0]:
+            return row[1]
 
 
 
@@ -268,11 +274,9 @@ def get_item_id_sold_last():
 
     for i in table:
         i[5] = int(i[5])
-        #print(i[5])
         if int(i[5]) > max:
             max = i[5]
 
-    #print(max)
     
     max_year_games = []
 
@@ -280,13 +284,11 @@ def get_item_id_sold_last():
         if int(i[5]) == max:
             max_year_games.append(i)
         
-    #print(max_year_games)
     
     ######################
     max = 0
     for i in max_year_games:
         i[3] = int(i[3])
-        #print(i[3])
         if int(i[3]) > max:
             max = i[3]
 
@@ -295,13 +297,11 @@ def get_item_id_sold_last():
     for i in max_year_games:
         if int(i[3]) == max:
             max_month_games.append(i)
-    #print(max_month_games) 
 
     ######################
     max = 0
     for i in max_month_games:
         i[4] = int(i[4])
-        #print(i[4])
         if int(i[4]) > max:
             max = i[4]
 
@@ -311,8 +311,6 @@ def get_item_id_sold_last():
         if int(i[4]) == max:
             max_day_games.append(i)
     
-    #print(max_day_games)
-    #print(max_day_games[0][0])
     return(max_day_games[0][0])
     #return "kH34Ju#&"
 
@@ -333,11 +331,9 @@ def get_item_id_sold_last_from_table(table):
 
     for i in table:
         i[5] = int(i[5])
-        #print(i[5])
         if int(i[5]) > max:
             max = i[5]
 
-    #print(max)
     
     max_year_games = []
 
@@ -345,13 +341,11 @@ def get_item_id_sold_last_from_table(table):
         if int(i[5]) == max:
             max_year_games.append(i)
         
-    #print(max_year_games)
     
     ######################
     max = 0
     for i in max_year_games:
         i[3] = int(i[3])
-        #print(i[3])
         if int(i[3]) > max:
             max = i[3]
 
@@ -360,13 +354,11 @@ def get_item_id_sold_last_from_table(table):
     for i in max_year_games:
         if int(i[3]) == max:
             max_month_games.append(i)
-    #print(max_month_games) 
 
     ######################
     max = 0
     for i in max_month_games:
         i[4] = int(i[4])
-        #print(i[4])
         if int(i[4]) > max:
             max = i[4]
 
@@ -376,8 +368,6 @@ def get_item_id_sold_last_from_table(table):
         if int(i[4]) == max:
             max_day_games.append(i)
     
-    #print(max_day_games)
-    #print(max_day_games[0][0])
     return(max_day_games[0][0])
     #return "kH34Ju#&"
 
@@ -392,8 +382,22 @@ def get_item_title_sold_last_from_table(table):
     Returns:
         str: the _title_ of the item that was sold most recently.
     """
+    max_date = []
+    year = int(table[0][5])
+    month = int(table[0][3])
+    day = int(table[0][4])
+    for row in table:
+        row[3], row[4], row[5] = int(row[3]), int(row[4]), int(row[5])
+        if row[5] >= year:
+            max_date.append(row[5])
+        if row[3] >= month and row[5] == max_date[0]:
+            max_date.append(row[3])
+        if row[4] >= day and row[5] == max_date[0] and row[3] == max_date[1]:
+            max_date.append(row[4])
+        if row[5] == max_date[0] and row[3] == max_date[1] and row[4] == max_date[2]:
+            return row[1]
+            
 
-    # your code
 
 
 def get_the_sum_of_prices(item_ids):
@@ -408,6 +412,14 @@ def get_the_sum_of_prices(item_ids):
         number: the sum of the items' prices
     """
     table = data_manager.get_table_from_file('sales/sales.csv')
+    result = 0
+    for element in item_ids:
+        for row in table:
+            row[2] = int(row[2])
+            if element == row[0]:
+                result += row[2]
+    return result
+
     
 
 
@@ -423,7 +435,13 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         number: the sum of the items' prices
     """
 
-    # your code
+    result = 0
+    for element in item_ids:
+        for row in table:
+            row[2] = int(row[2])
+            if element == row[0]:
+                result += row[2]
+    return result
 
 
 def get_customer_id_by_sale_id(sale_id):
