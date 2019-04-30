@@ -230,12 +230,12 @@ def go_to_main_menu(table):
     return 1
 
 def get_options():
-    options = ['Show costumer\'s data',
-        'Add new costumers',
-        'Remove costumer',
-        'Update costumer\'s data',
-        "Show costumer's ID with the longest name",
-        'Emails of subscripted costumers' ]
+    options = ['Show customer\'s data',
+        'Add new customers',
+        'Remove customer',
+        'Update customer\'s data',
+        "Show customer's ID with the longest name",
+        'Emails of subscripted customers' ]
     return options
 
 def get_features(table):
