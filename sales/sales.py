@@ -72,6 +72,8 @@ def choose(table):
     elif option == "11":
         id = ui.get_inputs(['id: '], "Give sales id.")
         ui.print_result(get_customer_id_by_sale_id_from_table(table, id[0]), 'The ID of the customer with the given sale ID is: ')
+    elif option == "12":
+        ui.print_result(get_all_customer_ids(table),'The costumer IDs in table are:')
     elif option == "0":
         return 'return'
     else:
@@ -89,7 +91,8 @@ def get_options():
                "Show the ID of the game sold most recently",
                "Show the title of the game sold most recently",
                "Show the overall price of the games with the given IDs",
-               "Show the ID of the customer with the given sale ID"]
+               "Show the ID of the customer with the given sale ID",
+               "Show all customer ID's"]
     return options
 
 
@@ -513,9 +516,9 @@ def get_all_customer_ids_from_table(table):
          set of str: set of customer_ids that are present in the table
     """
 
-    customer_ids = {}
+    customer_ids = set({})
     for row in table:
-        customer_ids.add(row[0])
+        customer_ids.add(str(row[6]))
     return customer_ids
 
 def get_all_sales_ids_for_customer_ids():
