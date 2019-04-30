@@ -40,9 +40,9 @@ def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
-        ui.print_result(get_the_last_buyer_name(), 'The name of the customer with thelast purchase is: ')
+        ui.print_result(get_the_last_buyer_name(), 'The name of the customer with the last purchase is: ')
     elif option == "2":
-        get_the_last_buyer_id()
+        ui.print_result(get_the_last_buyer_id(), 'The ID of the customer with the last purchase is: ')
     elif option == "3":
         get_the_buyer_name_spent_most_and_the_money_spent()
     elif option == "4":
@@ -91,7 +91,9 @@ def get_the_last_buyer_id():
         str: Customer id of the last buyer
     """
 
-    # your code
+    sale_id = sales.get_item_id_sold_last()
+    customer_id = sales.get_customer_id_by_sale_id(sale_id)
+    return customer_id
 
 
 def get_the_buyer_name_spent_most_and_the_money_spent():
