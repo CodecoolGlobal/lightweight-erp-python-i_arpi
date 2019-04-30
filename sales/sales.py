@@ -73,7 +73,9 @@ def choose(table):
         id = ui.get_inputs(['id: '], "Give sales id.")
         ui.print_result(get_customer_id_by_sale_id_from_table(table, id[0]), 'The ID of the customer with the given sale ID is: ')
     elif option == "12":
-        ui.print_result(get_all_customer_ids(table),'The costumer IDs in table are:')
+        ui.print_result(get_all_customer_ids(table),'The costumer IDs in table are: ')
+    elif option == "13":
+        ui.print_result(get_all_sales_ids_for_customer_ids_from_table(table),'The sales IDs for the customer IDs are: ')
     elif option == "0":
         return 'return'
     else:
@@ -92,7 +94,8 @@ def get_options():
                "Show the title of the game sold most recently",
                "Show the overall price of the games with the given IDs",
                "Show the ID of the customer with the given sale ID",
-               "Show all customer ID's"]
+               "Show all customer ID's",
+               "Show all sales IDs for the customer IDs"]
     return options
 
 
@@ -534,11 +537,11 @@ def get_all_sales_ids_for_customer_ids():
             all the sales id belong to the given customer_id
     """
     table = data_manager.get_table_from_file(file_name = 'sales/sales.csv')
-    return get_all_sales_ids_for_customer_ids_form_table(table)
+    return get_all_sales_ids_for_customer_ids_from_table(table)
     # your code
 
 
-def get_all_sales_ids_for_customer_ids_form_table(table):
+def get_all_sales_ids_for_customer_ids_from_table(table):
     """
     Returns a dictionary of (customer_id, sale_ids) where:
         customer_id:
