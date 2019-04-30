@@ -554,11 +554,11 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
     for row in table:
         costumer_id = row[6]
         if costumer_id in sales_ids_for_costumers.keys():
-            sales_ids = list(sales_ids_for_costumers[costumer_id])
+            sales_ids = sales_ids_for_costumers[costumer_id]
             sales_ids.append(row[0])
-            sales_ids_for_costumers[costumer_id] = tuple(sales_ids)
+            sales_ids_for_costumers[costumer_id] = sales_ids
         else:
-            sales_ids_for_costumers[costumer_id]= tuple (row[0])
+            sales_ids_for_costumers[costumer_id]= [row[0]]
     return sales_ids_for_costumers
             
 
