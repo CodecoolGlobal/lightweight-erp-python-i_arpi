@@ -255,7 +255,7 @@ def get_item_id_sold_last():
     Returns:
         str: the _id_ of the item that was sold most recently.
     """
-
+    
     # your code
     table = data_manager.get_table_from_file('sales/sales.csv')
     
@@ -310,7 +310,7 @@ def get_item_id_sold_last():
     #print(max_day_games[0][0])
     return(max_day_games[0][0])
     #return "kH34Ju#&"
-
+    
 
 def get_item_id_sold_last_from_table(table):
     """
