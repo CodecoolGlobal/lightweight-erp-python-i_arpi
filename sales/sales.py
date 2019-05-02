@@ -62,6 +62,20 @@ def choose(table):
     elif option == "7":
         id= ui.get_inputs(['id: '], "Give id.")
         ui.print_result(get_title_by_id_from_table(table, id[0]), 'The name of the game with the given ID is: ')
+    elif option == "8":
+        ui.print_result(get_item_id_sold_last_from_table(table), 'The ID of the game sold most recently is: ')
+    elif option == "9":
+        ui.print_result(get_item_title_sold_last_from_table(table), 'The title of the game sold most recently is: ')
+    elif option == "10":
+        item_ids = ui.get_inputs(['id: ', 'id: ', 'id: ', 'id: '], "Give the ids.")
+        ui.print_result(get_the_sum_of_prices_from_table(table, item_ids), 'The overall price of the games with the given IDs: ')
+    elif option == "11":
+        id = ui.get_inputs(['id: '], "Give sales id.")
+        ui.print_result(get_customer_id_by_sale_id_from_table(table, id[0]), 'The ID of the customer with the given sale ID is: ')
+    elif option == "12":
+        ui.print_result(get_all_customer_ids(table),'The costumer IDs in table are: ')
+    elif option == "13":
+        ui.print_result(get_all_sales_ids_for_customer_ids_from_table(table),'The sales IDs for the customer IDs are: ')
     elif option == "0":
         return 'return'
     else:
@@ -75,7 +89,13 @@ def get_options():
                "Update sales table",
                "Show the ID of the game sold for the lowest price",
                "Show the games sold between two given dates",
-               "Show the name of a game by a given ID"]
+               "Show the name of a game by a given ID",
+               "Show the ID of the game sold most recently",
+               "Show the title of the game sold most recently",
+               "Show the overall price of the games with the given IDs",
+               "Show the ID of the customer with the given sale ID",
+               "Show all customer ID's",
+               "Show all sales IDs for the customer IDs"]
     return options
 
 
@@ -85,7 +105,8 @@ def get_headers():
                "Price ",
                "Month ",
                "Day ",
-               "Year "]
+               "Year ",
+               "Customer ID"]
     return headers
 
 
@@ -196,9 +217,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     for row in table:
         row[2], row[3], row[4], row[5] = int(row[2]), int(row[3]), int(row[4]), int(row[5])
         if (row[5] >= year_from and row[3] > month_from) and (row[5] <= year_to and row[3] < month_to):
-            result.append(row)
+            result.append(row[:6])
         elif (row[5] >= year_from and row[3] == month_from and row[4] > day_from) and (row[5] <= year_to and row[3] == year_to and row[4] < year_to): 
-            result.append(row)
+            result.append(row[:6])
     return result
 
 
@@ -263,11 +284,9 @@ def get_item_id_sold_last():
 
     for i in table:
         i[5] = int(i[5])
-        #print(i[5])
         if int(i[5]) > max:
             max = i[5]
 
-    #print(max)
     
     max_year_games = []
 
@@ -275,13 +294,11 @@ def get_item_id_sold_last():
         if int(i[5]) == max:
             max_year_games.append(i)
         
-    #print(max_year_games)
     
     ######################
     max = 0
     for i in max_year_games:
         i[3] = int(i[3])
-        #print(i[3])
         if int(i[3]) > max:
             max = i[3]
 
@@ -290,13 +307,11 @@ def get_item_id_sold_last():
     for i in max_year_games:
         if int(i[3]) == max:
             max_month_games.append(i)
-    #print(max_month_games) 
 
     ######################
     max = 0
     for i in max_month_games:
         i[4] = int(i[4])
-        #print(i[4])
         if int(i[4]) > max:
             max = i[4]
 
@@ -306,8 +321,6 @@ def get_item_id_sold_last():
         if int(i[4]) == max:
             max_day_games.append(i)
     
-    #print(max_day_games)
-    #print(max_day_games[0][0])
     return(max_day_games[0][0])
     #return "kH34Ju#&"
     
@@ -328,11 +341,17 @@ def get_item_id_sold_last_from_table(table):
 
     for i in table:
         i[5] = int(i[5])
+<<<<<<< HEAD
         #print(i[5])
         if int(i[5]) > max:
             max = i[5]
 
     #print(max)
+=======
+        if int(i[5]) > max:
+            max = i[5]
+
+
     
     max_year_games = []
 
@@ -340,13 +359,19 @@ def get_item_id_sold_last_from_table(table):
         if int(i[5]) == max:
             max_year_games.append(i)
         
+<<<<<<< HEAD
     #print(max_year_games)
+=======
+>>>>>>> refs/remotes/origin/master
     
     ######################
     max = 0
     for i in max_year_games:
         i[3] = int(i[3])
+<<<<<<< HEAD
         #print(i[3])
+=======
+>>>>>>> refs/remotes/origin/master
         if int(i[3]) > max:
             max = i[3]
 
@@ -355,13 +380,19 @@ def get_item_id_sold_last_from_table(table):
     for i in max_year_games:
         if int(i[3]) == max:
             max_month_games.append(i)
+<<<<<<< HEAD
     #print(max_month_games) 
+=======
+>>>>>>> refs/remotes/origin/master
 
     ######################
     max = 0
     for i in max_month_games:
         i[4] = int(i[4])
+<<<<<<< HEAD
         #print(i[4])
+=======
+>>>>>>> refs/remotes/origin/master
         if int(i[4]) > max:
             max = i[4]
 
@@ -371,8 +402,11 @@ def get_item_id_sold_last_from_table(table):
         if int(i[4]) == max:
             max_day_games.append(i)
     
+<<<<<<< HEAD
     #print(max_day_games)
     #print(max_day_games[0][0])
+=======
+>>>>>>> refs/remotes/origin/master
     return(max_day_games[0][0])
     #return "kH34Ju#&"
 
@@ -387,8 +421,22 @@ def get_item_title_sold_last_from_table(table):
     Returns:
         str: the _title_ of the item that was sold most recently.
     """
+    max_date = []
+    year = int(table[0][5])
+    month = int(table[0][3])
+    day = int(table[0][4])
+    for row in table:
+        row[3], row[4], row[5] = int(row[3]), int(row[4]), int(row[5])
+        if row[5] >= year:
+            max_date.append(row[5])
+        if row[3] >= month and row[5] == max_date[0]:
+            max_date.append(row[3])
+        if row[4] >= day and row[5] == max_date[0] and row[3] == max_date[1]:
+            max_date.append(row[4])
+        if row[5] == max_date[0] and row[3] == max_date[1] and row[4] == max_date[2]:
+            return row[1]
+            
 
-    # your code
 
 
 def get_the_sum_of_prices(item_ids):
@@ -403,6 +451,14 @@ def get_the_sum_of_prices(item_ids):
         number: the sum of the items' prices
     """
     table = data_manager.get_table_from_file('sales/sales.csv')
+    result = 0
+    for element in item_ids:
+        for row in table:
+            row[2] = int(row[2])
+            if element == row[0]:
+                result += row[2]
+    return result
+
     
 
 
@@ -418,7 +474,13 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         number: the sum of the items' prices
     """
 
-    # your code
+    result = 0
+    for element in item_ids:
+        for row in table:
+            row[2] = int(row[2])
+            if element == row[0]:
+                result += row[2]
+    return result
 
 
 def get_customer_id_by_sale_id(sale_id):
@@ -433,7 +495,14 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    try:
+        for row in table:
+            if sale_id == row[0]:
+                result = row[6]
+        return result
+    except UnboundLocalError:
+        return None
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -448,7 +517,13 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    try:
+        for row in table:
+            if sale_id == row[0]:
+                result = row[6]
+        return result
+    except UnboundLocalError:
+        return None
 
 
 def get_all_customer_ids():
@@ -473,9 +548,9 @@ def get_all_customer_ids_from_table(table):
          set of str: set of customer_ids that are present in the table
     """
 
-    customer_ids = {}
+    customer_ids = set({})
     for row in table:
-        customer_ids.add(row[0])
+        customer_ids.add(str(row[6]))
     return customer_ids
 
 def get_all_sales_ids_for_customer_ids():
@@ -490,11 +565,12 @@ def get_all_sales_ids_for_customer_ids():
          (dict of (key, value): (customer_id, (list) sale_ids)) where the sale_ids list contains
             all the sales id belong to the given customer_id
     """
-
+    table = data_manager.get_table_from_file(file_name = 'sales/sales.csv')
+    return get_all_sales_ids_for_customer_ids_from_table(table)
     # your code
 
 
-def get_all_sales_ids_for_customer_ids_form_table(table):
+def get_all_sales_ids_for_customer_ids_from_table(table):
     """
     Returns a dictionary of (customer_id, sale_ids) where:
         customer_id:
@@ -506,6 +582,17 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
          (dict of (key, value): (customer_id, (list) sale_ids)) where the sale_ids list contains
          all the sales id belong to the given customer_id
     """
+    sales_ids_for_costumers = {}
+    for row in table:
+        costumer_id = row[6]
+        if costumer_id in sales_ids_for_costumers.keys():
+            sales_ids = sales_ids_for_costumers[costumer_id]
+            sales_ids.append(row[0])
+            sales_ids_for_costumers[costumer_id] = sales_ids
+        else:
+            sales_ids_for_costumers[costumer_id]= [row[0]]
+    return sales_ids_for_costumers
+            
 
     # your code
 
