@@ -44,11 +44,11 @@ def choose():
     elif option == "3":
         ui.print_result(get_the_buyer_name_spent_most_and_the_money_spent(), 'The name of the customer who spent the most and the amount spent are: ')
     elif option == "4":
-        get_the_buyer_id_spent_most_and_the_money_spent()
+        ui.print_result(get_the_buyer_id_spent_most_and_the_money_spent(), "The most frequent buyer's name is: ")
     elif option == "5":
-        get_the_most_frequent_buyers_names(num=1)
+        ui.print_result(get_the_most_frequent_buyers_names(num=1), 'The ID of the customer who spent the most and the amount spent are: ')
     elif option == "6":
-        get_the_most_frequent_buyers_ids(num=1)
+        ui.print_result(get_the_most_frequent_buyers_ids(num=1), "The most frequent buyer's ID is: ")
     elif option == "0":
         return 'return'
     else:
@@ -61,8 +61,7 @@ def get_options():
                "Show the buyer's name who spent most and the amount of money spent",
                "Show the buyer's ID who spent most and the amount of money spent ",
                "Show the most frequent's buyers' name",
-               "Show the most frequent's buyers' ID",
-               "Show the name of the customer who spent the most and the amount spent"]
+               "Show the most frequent's buyers' ID"]
     return options
 
 
