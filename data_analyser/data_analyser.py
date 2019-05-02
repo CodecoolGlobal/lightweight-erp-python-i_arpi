@@ -142,6 +142,40 @@ def get_the_most_frequent_buyers_names(num=1):
     # your code
 
 
+    dict_of_ids = sales.get_num_of_sales_per_customer_ids()
+
+    customer_table = sales.import_data_manager_customers()
+    #customer_table = data_manager.get_table_from_file('customers/customers.csv')
+
+
+    #print (dict_of_ids) # dict készítés
+    tuple_of_ids = sorted(dict_of_ids.items(), key=lambda x: x[1]) #sorba rendezés növekvőbe
+    #print(tuple_of_ids) 
+    dict_ordered = dict((y, x) for y, x in tuple_of_ids)
+    #print(dict_ordered)
+
+    list_of_frequent_buyers_data = []
+
+    for i in dict_ordered:
+        for j in customer_table:
+            for k in j:
+                if k == i:
+                    list_of_frequent_buyers_data.append(j)
+
+    #print(list_of_frequent_buyers_data)
+    
+
+    tuple_list = []
+    for index, j in enumerate(list_of_frequent_buyers_data):
+            my_tuple = ( str(j[1]), int(list(dict_ordered.values())[index]) )
+            tuple_list.append(my_tuple)
+
+    
+    reverse_tuple_list = tuple_list[::-1]
+
+    return (reverse_tuple_list[0:num])
+
+
 def get_the_most_frequent_buyers_ids(num=1):
     """
     Returns 'num' number of buyers (more precisely: the customer ids of them) who bought more frequent in an
