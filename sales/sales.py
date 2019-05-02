@@ -298,11 +298,11 @@ def get_item_id_sold_last_from_table(table):
     for i in table:
         i[5] = int(i[5])
 
-        #print(i[5])
+        
         if int(i[5]) > max:
             max = i[5]
 
-    #print(max)
+    
 
         if int(i[5]) > max:
             max = i[5]
@@ -316,7 +316,7 @@ def get_item_id_sold_last_from_table(table):
             max_year_games.append(i)
         
 
-    #print(max_year_games)
+    
 
 
     
@@ -325,7 +325,7 @@ def get_item_id_sold_last_from_table(table):
     for i in max_year_games:
         i[3] = int(i[3])
 
-        #print(i[3])
+        
 
         if int(i[3]) > max:
             max = i[3]
@@ -336,7 +336,7 @@ def get_item_id_sold_last_from_table(table):
         if int(i[3]) == max:
             max_month_games.append(i)
 
-    #print(max_month_games) 
+    
 
 
     ######################
@@ -344,7 +344,7 @@ def get_item_id_sold_last_from_table(table):
     for i in max_month_games:
         i[4] = int(i[4])
 
-        #print(i[4])
+        
 
         if int(i[4]) > max:
             max = i[4]
@@ -356,8 +356,7 @@ def get_item_id_sold_last_from_table(table):
             max_day_games.append(i)
     
 
-    #print(max_day_games)
-    #print(max_day_games[0][0])
+    
 
     return(max_day_games[0][0])
     #return "kH34Ju#&"
@@ -564,8 +563,13 @@ def get_num_of_sales_per_customer_ids():
     table = data_manager.get_table_from_file(file_name = 'sales/sales.csv')
     
     list_of_ids = [list_[-1] for list_ in table] #7=last element of sales list
-    dict_of_ids = {ids:list_of_ids.count(ids) for ids in list_of_ids}
-
+    dict_of_ids = {}
+    for i in list_of_ids:
+        if i in dict_of_ids:
+            dict_of_ids[i] += 1
+        else:
+            dict_of_ids[i] = 1
+    
     return dict_of_ids
    
 
@@ -580,7 +584,13 @@ def get_num_of_sales_per_customer_ids_from_table(table):
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
     list_of_ids = [list_[-1] for list_ in table] #7=last element of sales list
-    dict_of_ids = {ids:list_of_ids.count(ids) for ids in list_of_ids}
+    dict_of_ids = {}
+    for i in list_of_ids:
+        if i in dict_of_ids:
+            dict_of_ids[i] += 1
+        else:
+            dict_of_ids[i] = 1
+    
 
     return dict_of_ids
 
