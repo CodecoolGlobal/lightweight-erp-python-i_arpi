@@ -127,7 +127,7 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
     for element in sales_data.keys():
         sales_data.update({element: sales.get_the_sum_of_prices(sales_data[element])})
     
-    best_buyer_id = max(sales_data, key=sales_data.get))
+    best_buyer_id = max(sales_data, key=sales_data.get)
     amount = sales_data[max(sales_data, key=sales_data.get)]
     return (best_buyer_id, amount)
 
