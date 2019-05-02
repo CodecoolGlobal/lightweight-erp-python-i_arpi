@@ -561,7 +561,13 @@ def get_num_of_sales_per_customer_ids():
     """
 
     # your code
+    table = data_manager.get_table_from_file(file_name = 'sales/sales.csv')
+    
+    list_of_ids = [list_[7] for list_ in table] #7=last element of sales list
+    dict_of_ids = {ids:list_of_ids.count(ids) for ids in list_of_ids}
 
+    return dict_of_ids
+   
 
 def get_num_of_sales_per_customer_ids_from_table(table):
     """
@@ -573,6 +579,10 @@ def get_num_of_sales_per_customer_ids_from_table(table):
      Returns:
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
+    list_of_ids = [list_[7] for list_ in table] #7=last element of sales list
+    dict_of_ids = {ids:list_of_ids.count(ids) for ids in list_of_ids}
+
+    return dict_of_ids
 
     # your code
 

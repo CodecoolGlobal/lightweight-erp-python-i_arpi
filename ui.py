@@ -69,7 +69,7 @@ def print_table(table, title_list):
     left_slash = "\\"
     separator = "‖"
     
-    longest_titles = len_of_colums(new_table)
+    longest_titles = len_of_colums(new_table) ###########!!!!!!!
     separator_line = []
 
     for i in longest_titles:

@@ -156,3 +156,10 @@ def get_the_most_frequent_buyers_ids(num=1):
     """
 
     # your code
+    
+    dict_of_ids = sales.get_num_of_sales_per_customer_ids()
+
+    tuple_of_ids = sorted(dict_of_ids.items(), key=lambda x: x[1]) #sorba rendezés növekvőbe
+    tuple_of_ids = (tuple_of_ids[::-1]) # sorba rendezés csökkenpbe(legnagyobb jön először)
+
+    return (tuple_of_ids[0:num])
