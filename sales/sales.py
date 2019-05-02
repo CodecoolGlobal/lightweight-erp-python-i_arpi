@@ -276,54 +276,10 @@ def get_item_id_sold_last():
     Returns:
         str: the _id_ of the item that was sold most recently.
     """
-    
+
     # your code
     table = data_manager.get_table_from_file('sales/sales.csv')
-    
-    max = 0
-
-    for i in table:
-        i[5] = int(i[5])
-        if int(i[5]) > max:
-            max = i[5]
-
-    
-    max_year_games = []
-
-    for i in table:
-        if int(i[5]) == max:
-            max_year_games.append(i)
-        
-    
-    ######################
-    max = 0
-    for i in max_year_games:
-        i[3] = int(i[3])
-        if int(i[3]) > max:
-            max = i[3]
-
-    max_month_games = []
-
-    for i in max_year_games:
-        if int(i[3]) == max:
-            max_month_games.append(i)
-
-    ######################
-    max = 0
-    for i in max_month_games:
-        i[4] = int(i[4])
-        if int(i[4]) > max:
-            max = i[4]
-
-    max_day_games = []
-
-    for i in max_month_games:
-        if int(i[4]) == max:
-            max_day_games.append(i)
-    
-    return(max_day_games[0][0])
-    #return "kH34Ju#&"
-    
+    return get_item_id_sold_last_from_table(table)
 
 def get_item_id_sold_last_from_table(table):
     """
@@ -341,13 +297,13 @@ def get_item_id_sold_last_from_table(table):
 
     for i in table:
         i[5] = int(i[5])
-<<<<<<< HEAD
+
         #print(i[5])
         if int(i[5]) > max:
             max = i[5]
 
     #print(max)
-=======
+
         if int(i[5]) > max:
             max = i[5]
 
@@ -359,19 +315,18 @@ def get_item_id_sold_last_from_table(table):
         if int(i[5]) == max:
             max_year_games.append(i)
         
-<<<<<<< HEAD
+
     #print(max_year_games)
-=======
->>>>>>> refs/remotes/origin/master
+
+
     
     ######################
     max = 0
     for i in max_year_games:
         i[3] = int(i[3])
-<<<<<<< HEAD
+
         #print(i[3])
-=======
->>>>>>> refs/remotes/origin/master
+
         if int(i[3]) > max:
             max = i[3]
 
@@ -380,19 +335,17 @@ def get_item_id_sold_last_from_table(table):
     for i in max_year_games:
         if int(i[3]) == max:
             max_month_games.append(i)
-<<<<<<< HEAD
+
     #print(max_month_games) 
-=======
->>>>>>> refs/remotes/origin/master
+
 
     ######################
     max = 0
     for i in max_month_games:
         i[4] = int(i[4])
-<<<<<<< HEAD
+
         #print(i[4])
-=======
->>>>>>> refs/remotes/origin/master
+
         if int(i[4]) > max:
             max = i[4]
 
@@ -402,11 +355,10 @@ def get_item_id_sold_last_from_table(table):
         if int(i[4]) == max:
             max_day_games.append(i)
     
-<<<<<<< HEAD
+
     #print(max_day_games)
     #print(max_day_games[0][0])
-=======
->>>>>>> refs/remotes/origin/master
+
     return(max_day_games[0][0])
     #return "kH34Ju#&"
 
@@ -599,6 +551,7 @@ def get_all_sales_ids_for_customer_ids_from_table(table):
 
 def get_num_of_sales_per_customer_ids():
     """
+
      Reads the customer-sales association table with the help of the data_manager module.
      Returns a dictionary of (customer_id, num_of_sales) where:
         customer_id:
