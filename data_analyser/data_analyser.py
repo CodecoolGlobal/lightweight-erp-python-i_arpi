@@ -153,12 +153,25 @@ def get_the_most_frequent_buyers_names(num=1):
     customer_table = sales.import_data_manager_customers()
     #customer_table = data_manager.get_table_from_file('customers/customers.csv')
 
+    dict_of_ids_values = list(dict_of_ids.items())
+    list_of_IDs = list(dict_of_ids.keys())
 
-    #print (dict_of_ids) # dict készítés
-    tuple_of_ids = sorted(dict_of_ids.items(), key=lambda x: x[1]) #sorba rendezés növekvőbe
-    #print(tuple_of_ids) 
+    dict_of_ids_values_sorted = []
+
+    while dict_of_ids_values:
+        minimum = dict_of_ids_values[0][1]
+        smallest_item = dict_of_ids_values[0]  
+        for x in dict_of_ids_values: 
+            if x[1] < minimum:
+                minimum = x[1]
+                smallest_item = x
+        dict_of_ids_values_sorted.append(smallest_item)
+        dict_of_ids_values.remove(smallest_item) 
+
+    tuple_of_ids = dict_of_ids_values_sorted
+    
     dict_ordered = dict((y, x) for y, x in tuple_of_ids)
-    #print(dict_ordered)
+    
 
     list_of_frequent_buyers_data = []
 
@@ -168,7 +181,7 @@ def get_the_most_frequent_buyers_names(num=1):
                 if k == i:
                     list_of_frequent_buyers_data.append(j)
 
-    #print(list_of_frequent_buyers_data)
+    
     
 
     tuple_list = []
@@ -199,7 +212,23 @@ def get_the_most_frequent_buyers_ids(num=1):
     
     dict_of_ids = sales.get_num_of_sales_per_customer_ids()
 
-    tuple_of_ids = sorted(dict_of_ids.items(), key=lambda x: x[1]) #sorba rendezés növekvőbe
+    dict_of_ids_values = list(dict_of_ids.items())
+    list_of_IDs = list(dict_of_ids.keys())
+
+    dict_of_ids_values_sorted = []
+
+    while dict_of_ids_values:
+        minimum = dict_of_ids_values[0][1]
+        smallest_item = dict_of_ids_values[0]  
+        for x in dict_of_ids_values: 
+            if x[1] < minimum:
+                minimum = x[1]
+                smallest_item = x
+        dict_of_ids_values_sorted.append(smallest_item)
+        dict_of_ids_values.remove(smallest_item) 
+
+    tuple_of_ids = dict_of_ids_values_sorted
+    
     tuple_of_ids = (tuple_of_ids[::-1]) # sorba rendezés csökkenpbe(legnagyobb jön először)
 
     return (tuple_of_ids[0:num])
