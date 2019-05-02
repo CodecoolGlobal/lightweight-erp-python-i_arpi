@@ -153,8 +153,6 @@ def get_subscribed_emails(table):
         Returns:
             list: list of strings (where a string is like "email;name")
         """
-
-    return 'name'
     # your code
     subscribed_emails = []
     for row in table:
@@ -258,7 +256,7 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('crm/customers.csv')
+    table = data_manager.get_table_from_file('crm/customers_test.csv')
     while True:
         ui.print_menu("CRM Menu", get_options(), "Go back to main menu")
         try:
